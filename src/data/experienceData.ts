@@ -1,0 +1,63 @@
+import { Experience } from "../types/experience.types";
+
+export const experiences: Experience[] = [
+  {
+    id: "exp1",
+    role: "Frontend Development Engineer",
+    company: "Consenko",
+    location: "Noida Uttar Pradesh",
+    startDate: "2024-01",
+    endDate: null,
+    current: true,
+    description: [
+      "Enhanced user experience through the development of responsive and accessible Ul using advanced CSS techniques (e.g., Flexbox, Grid).",
+      "Implemented a liveness detection feature in a React application using AWS services to enhance user authentication security.",
+      "Engineered reusable React components, enhancing code maintainability and reducing development time.",
+      "Implemented comprehensive internationalization (i18n) for a React-based and Utilized the react-i18next library, employing the useTranslation hook for efficient language switching.",
+      "Spearheaded the creation and maintenance of a comprehensive in- house Ul library (Custom Ul Library Development).",
+      "Implemented sophisticated form handling across multiple projects using react-hook-form library (Implemented real-time form validation, reducing form submission errors by 60%).",
+      "Advocated for using SVGs as components for icons to enable dynamics updates.",
+    ],
+    technologies: [
+      "React",
+      "TypeScript",
+      "Nextjs",
+      "Redux",
+      "Hooks",
+      "Material UI",
+      "Mobx",
+    ],
+  },
+  {
+    id: "exp2",
+    role: "Frontend Developer",
+    company: "Redcliffe LifeScience Pvt Ltd",
+    location: "Noida Uttar Pradesh",
+    startDate: "2021-11",
+    endDate: "2023-08",
+    current: false,
+    description: [
+      "Developed and maintained multiple client-facing web applications",
+      "Implemented responsive design principles ensuring cross-browser compatibility",
+      "Integrated RESTful APIs and implemented state management using Redux",
+      "Collaborated with UX/UI designers to implement pixel-perfect designs",
+    ],
+    technologies: ["React", "JavaScript", "CSS3", "Sass", "RESTful APIs"],
+  },
+  {
+    id: "exp3",
+    role: "Frontend Developer Intern",
+    company: "Redcliffe LifeScience Pvt Ltd",
+    location: "Noida Uttar Pradesh",
+    startDate: "2021-11",
+    endDate: "2022-03",
+    current: false,
+    description: [
+      "Assisted in the development of a customer-facing e-commerce platform",
+      "Built reusable components and implemented frontend features",
+      "Fixed bugs and improved web application performance",
+      "Participated in daily stand-ups and sprint planning meetings",
+    ],
+    technologies: ["HTML5", "CSS3", "JavaScript", "jQuery", "Bootstrap"],
+  },
+];
