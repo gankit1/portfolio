@@ -1,4 +1,8 @@
 import { Project } from "../types/project.types";
+import W_logo from "../assets/images/projects/wizcart.jpg";
+import R_logo from "../assets/images/projects/red.jpg";
+import H_logo from "../assets/images/projects/hr-analytics.jpg";
+import P_logo from "../assets/images/projects/port.jpg";
 
 export const projects: Project[] = [
   {
@@ -6,7 +10,7 @@ export const projects: Project[] = [
     title: "Wizcart",
     description:
       "Wizcart is your one-stop destination for trusted professionals near you for all your needs, including home services and electronic repairs. The platform connects users with verified service providers, simplifying the process of finding reliable help for various tasks.",
-    image: "/images/projects/wizcart.jpg",
+    image: W_logo,
     technologies: [
       "React",
       "Redux",
@@ -46,7 +50,7 @@ export const projects: Project[] = [
     title: "Customer Relationship Management (CRM)",
     description:
       "A comprehensive CRM system that handles multiple business verticals in a single application, including Home Diagnostics, Radiology, Genomics, and Inventory. The system manages a team of call center agents with live calling and messaging capabilities integrated directly into the platform.",
-    image: "/images/projects/crm.jpg",
+    image: R_logo,
     technologies: [
       "React",
       "Redux",
@@ -89,7 +93,7 @@ export const projects: Project[] = [
     title: "HR Analytics Dashboard",
     description:
       "The HR Analytics Dashboard is a professional dashboard built using React, Material-UI (MUI), and advanced JavaScript. It provides comprehensive analytics and insights for HR professionals. With its user-friendly interface and powerful features, the dashboard enables HR teams to effectively track and analyze various HR metrics, such as employee performance, recruitment data, training and development, and more. By leveraging the latest technologies and data visualization techniques, the HR Analytics Dashboard empowers organizations to make data-driven decisions and optimize their HR strategies. Whether you are a small business or a large enterprise, this dashboard is designed to meet your HR analytics needs and enhance your HR management capabilities.",
-    image: "/images/projects/disney-clone.jpg",
+    image: H_logo,
     technologies: [
       "React",
       "Redux",
@@ -129,7 +133,7 @@ export const projects: Project[] = [
     title: "Personal Portfolio Website",
     description:
       "A modern, responsive portfolio website built with React, TypeScript, and Material UI to showcase my projects, skills, and experience. The site features a clean, professional design with dark/light mode support, animations, and contact form functionality.",
-    image: "/images/projects/portfolio.jpg",
+    image: P_logo,
     technologies: [
       "React",
       "TypeScript",
