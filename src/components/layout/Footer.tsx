@@ -15,7 +15,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Link as RouterLink } from "react-router-dom";
 import { socialLinks } from "../../data/socialData";
 import { useState, useEffect } from "react";
-import useScrollToTop from "../../hooks/useScrollToTop"; // Adjust the path as needed
+import useScrollToTop from "../../hooks/useScrollToTop";
 
 const Footer = () => {
   const theme = useTheme();
