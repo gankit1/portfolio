@@ -20,3 +20,15 @@ A modern portfolio website built with React, TypeScript, and Material-UI showcas
 - Framer Motion - Animation library
 - React Router - Navigation and routing
 - EmailJS - Email functionality
+
+## 📚 Additional Information
+
+- The portfolio website is fully responsive and optimized for all devices, ensuring a seamless user experience.
+- The Dark/Light mode toggle allows users to switch between a dark and light color scheme, based on their preference.
+- The use of Framer Motion library adds dynamic and engaging animations to the UI elements, enhancing the overall visual appeal.
+- The contact form is equipped with validation to ensure that users provide accurate and complete information.
+- The project showcase section allows for easy filtering, enabling visitors to explore specific projects based on their interests.
+- The skills visualization feature provides a visually appealing representation of the skills possessed by the developer.
+- The experience timeline showcases the professional journey of the developer, highlighting key milestones and achievements.
+
+Feel free to explore the portfolio website and get in touch using the contact form for any inquiries or collaboration opportunities.
