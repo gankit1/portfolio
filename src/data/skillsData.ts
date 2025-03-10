@@ -93,13 +93,6 @@ export const skills: Skill[] = [
     category: "tools",
   },
   {
-    id: "jira",
-    name: "Jira",
-    icon: "jira",
-    level: 95,
-    category: "tools",
-  },
-  {
     id: "redux",
     name: "Redux",
     icon: "redux",
@@ -119,5 +112,19 @@ export const skills: Skill[] = [
     icon: "jira",
     level: 90,
     category: "frontend",
+  },
+  {
+    id: "c",
+    name: "C",
+    icon: "c",
+    level: 90,
+    category: "other",
+  },
+  {
+    id: "wordpress",
+    name: "Wordpress",
+    icon: "wordpress",
+    level: 90,
+    category: "other",
   },
 ];
