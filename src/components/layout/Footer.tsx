@@ -23,7 +23,6 @@ const Footer = () => {
 
   // Custom hook for scroll to top functionality for route changes
   useScrollToTop();
-
   const year = new Date().getFullYear();
 
   const footerSections = [
