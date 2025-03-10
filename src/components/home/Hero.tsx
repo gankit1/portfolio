@@ -13,6 +13,7 @@ import { motion } from "framer-motion";
 import { Link as RouterLink } from "react-router-dom";
 import SocialIcons from "../common/SocialIcons";
 import ImagePreview from "../../assets/images/profile.jpg";
+import BgImgae from "../../assets/images/hero-bg.jpg";
 
 const Hero = () => {
   const theme = useTheme();
@@ -37,7 +38,7 @@ const Hero = () => {
           theme.palette.mode === "dark" ? "7" : "0"
         }), rgba(0, 0, 0, 0.${
           theme.palette.mode === "dark" ? "7" : "0"
-        })), url('/images/hero-bg.jpg')`,
+        })), url(${BgImgae})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         "&::before": {
