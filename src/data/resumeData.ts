@@ -1,8 +1,3 @@
-/**
- * Resume data for portfolio website
- * Last updated by gankit1: 2025-03-09 05:44:07
- */
-
 export interface Education {
   degree: string;
   institution: string;
@@ -11,7 +6,6 @@ export interface Education {
   location: string;
   field?: string;
 }
-
 export interface WorkExperience {
   position: string;
   company: string;
@@ -20,19 +14,16 @@ export interface WorkExperience {
   location: string;
   highlights: string[];
 }
-
 export interface Project {
   title: string;
   period: string;
   description: string[];
 }
-
 export interface Achievement {
   title: string;
   date: string;
   description: string;
 }
-
 export interface PersonalInfo {
   name: string;
   email: string;
@@ -43,7 +34,6 @@ export interface PersonalInfo {
   github: string;
   summary: string;
 }
-
 export interface Skills {
   technical: string[];
   soft: string[];
@@ -145,10 +135,10 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "DISNEY-CLONE",
+    title: "HR Analytics Dashboard",
     period: "05/2021 - 07/2021",
     description: [
-      "Disney clone made with advanced react, redux & firebase which uses redux-thunk to asynchronously fetch movie data of over 30 thousand movies fromTmdb api.",
+      "The HR Analytics Dashboard is a professional dashboard built using React, Material-UI (MUI), and advanced JavaScript. It provides comprehensive analytics and insights for HR professionals. With its user-friendly interface and powerful features, the dashboard enables HR teams to effectively track and analyze various HR metrics, such as employee performance, recruitment data, training and development, and more. By leveraging the latest technologies and data visualization techniques, the HR Analytics Dashboard empowers organizations to make data-driven decisions and optimize their HR strategies. Whether you are a small business or a large enterprise, this dashboard is designed to meet your HR analytics needs and enhance your HR management capabilities.",
     ],
   },
 ];

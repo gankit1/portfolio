@@ -1,29 +1,9 @@
-/**
- * Custom hook for detecting when an element enters the viewport
- * Last updated by ShankarCoursera: 2025-03-08 19:06:17
- */
-
 import { useState, useEffect, useRef, RefObject } from "react";
 
 interface IntersectionObserverOptions {
-  /**
-   * Root element to use as viewport (null means browser viewport)
-   */
   root?: Element | null;
-
-  /**
-   * Margin around the root element
-   */
   rootMargin?: string;
-
-  /**
-   * Threshold(s) at which to trigger callback
-   */
   threshold?: number | number[];
-
-  /**
-   * Whether to disconnect the observer after first intersection
-   */
   disconnectOnEntry?: boolean;
 }
 
@@ -32,6 +12,7 @@ interface IntersectionObserverOptions {
  * @param options - IntersectionObserver options
  * @returns [ref, isIntersecting, entry] - Element reference, boolean indicating if element is intersecting, and the IntersectionObserverEntry
  */
+
 const useIntersectionObserver = <T extends Element>(
   options: IntersectionObserverOptions = {}
 ): [RefObject<T>, boolean, IntersectionObserverEntry | null] => {

@@ -126,10 +126,6 @@ const Hero = () => {
                   color="textSecondary"
                   sx={{ mb: 4, maxWidth: "600px" }}
                 >
-                  {/* I build exceptional user interfaces and web applications using
-                  React, TypeScript, and modern frontend technologies.
-                  Passionate about creating responsive, accessible, and
-                  performant web experiences. */}
                   Passionate and innovative front-end developer with 3+ years of
                   experience in crafting dynamic and responsive web
                   applications. Adept at utilizing the latest web technologies

@@ -21,5 +21,4 @@ module.exports = {
     node: true,
     es6: true,
   },
-  // Last updated by ShankarCourseraAnkut@OP: 2025-03-08 19:24:35
 };
