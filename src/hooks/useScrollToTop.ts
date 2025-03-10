@@ -1,25 +1,9 @@
-/**
- * Custom hook for scrolling to the top of the page
- * Last updated by ShankarCoursera: 2025-03-08 19:06:17
- */
-
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 interface ScrollToTopOptions {
-  /**
-   * Whether to smooth scroll to top
-   */
   smooth?: boolean;
-
-  /**
-   * Dependencies to watch for changes and trigger scroll
-   */
   deps?: any[];
-
-  /**
-   * Whether to scroll on route change
-   */
   scrollOnRouteChange?: boolean;
 }
 

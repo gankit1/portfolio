@@ -63,7 +63,7 @@ const About = () => {
               >
                 <Avatar
                   src={ImagePreview}
-                  alt="Shankar Ravishankar"
+                  alt="Ankit K Gupta"
                   sx={{
                     width: { xs: 250, md: 350 },
                     height: { xs: 250, md: 350 },
@@ -90,7 +90,7 @@ const About = () => {
                 color="primary"
                 sx={{ mb: 3 }}
               >
-                Frontend Developer
+                Software Developer
               </Typography>
 
               <Typography variant="body1" paragraph sx={{ mb: 2 }}>
