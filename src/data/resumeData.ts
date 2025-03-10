@@ -69,7 +69,7 @@ export const workExperience: WorkExperience[] = [
     ],
   },
   {
-    position: "SOFTWARE DEVELOPER",
+    position: "FRONTEND DEVELOPER",
     company: "Redcliffe Life Diagnostics",
     startDate: "04/2022",
     endDate: "10/2023",

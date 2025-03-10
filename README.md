@@ -1,6 +1,6 @@
 # Ankit Kumar Gupta Portfolio
 
-A modern portfolio website built with React, TypeScript, and Material-UI showcasing my projects and skills as a Frontend Developer.
+A modern portfolio website built with React, TypeScript, and Material-UI showcasing my projects and skills as a Software Developer.
 
 ## 🚀 Features
 

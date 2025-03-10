@@ -13,7 +13,7 @@ import "./styles/global.css";
 
 function App() {
   useEffect(() => {
-    document.title = "Ankit Kumar Gupta | Frontend Developer";
+    document.title = "Ankit Kumar Gupta | Software Developer";
   }, []);
 
   return (

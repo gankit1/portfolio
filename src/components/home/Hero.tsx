@@ -113,7 +113,7 @@ const Hero = () => {
                     fontSize: { xs: "1.5rem", md: "2rem" },
                   }}
                 >
-                  Frontend Developer
+                  Software Developer
                 </Typography>
               </motion.div>
 
