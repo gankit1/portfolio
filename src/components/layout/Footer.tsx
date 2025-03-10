@@ -8,6 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { GitHub, LinkedIn, Twitter, Email } from "@mui/icons-material";
+import ChangeHistoryIcon from "@mui/icons-material/ChangeHistory";
 import { Link as RouterLink } from "react-router-dom";
 import { socialLinks } from "../../data/socialData";
 
@@ -31,7 +32,11 @@ const Footer = () => {
     {
       title: "Resources",
       links: [
-        { name: "Resume", path: "/assets/resume.pdf", external: true },
+        {
+          name: "Resume",
+          path: process.env.PUBLIC_URL + "/resume.pdf",
+          external: true,
+        },
         {
           name: "Portfolio Source",
           path: "https://github.com/gankit1/portfolio",
@@ -53,7 +58,7 @@ const Footer = () => {
       case "Email":
         return <Email />;
       default:
-        return <GitHub />;
+        return <ChangeHistoryIcon />;
     }
   };
 

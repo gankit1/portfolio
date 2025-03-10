@@ -1,11 +1,6 @@
 import { Box, IconButton, Tooltip, useTheme } from "@mui/material";
-import {
-  GitHub,
-  LinkedIn,
-  Twitter,
-  Email,
-  KeyboardCommandKey,
-} from "@mui/icons-material";
+import { GitHub, LinkedIn, Twitter, Email } from "@mui/icons-material";
+import ChangeHistoryIcon from "@mui/icons-material/ChangeHistory";
 import { socialLinks } from "../../data/socialData";
 
 interface SocialIconsProps {
@@ -30,10 +25,8 @@ const SocialIcons = ({
         return <Twitter />;
       case "Email":
         return <Email />;
-      case "Medium":
-        return <KeyboardCommandKey />;
       default:
-        return <GitHub />;
+        return <ChangeHistoryIcon />;
     }
   };
 

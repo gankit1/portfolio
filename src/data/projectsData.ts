@@ -1,64 +1,3 @@
-// import { Project } from "../types/project.types";
-
-// export const projects: Project[] = [
-//   {
-//     id: "project1",
-//     title: "E-Commerce Platform",
-//     description:
-//       "A full-stack e-commerce platform built with React, Node.js, and MongoDB. Features include user authentication, product management, cart functionality, and payment integration.",
-//     image: "/images/projects/project1.jpg",
-//     technologies: ["React", "Node.js", "Express", "MongoDB", "Redux", "Stripe"],
-//     liveUrl: "https://ecommerce-platform.example.com",
-//     githubUrl: "https://github.com/ShankarCourseraPersonal/ecommerce-platform",
-//     featured: true,
-//     category: "",
-//     completedDate: "",
-//   },
-//   {
-//     id: "project2",
-//     title: "Task Management App",
-//     description:
-//       "A Kanban-style task management application with drag-and-drop functionality, task filtering, and user collaboration features.",
-//     image: "/images/projects/project2.jpg",
-//     technologies: [
-//       "React",
-//       "TypeScript",
-//       "Firebase",
-//       "Material-UI",
-//       "React DnD",
-//     ],
-//     liveUrl: "https://task-management.example.com",
-//     githubUrl: "https://github.com/ShankarCourseraPersonal/task-management",
-//     featured: true,
-//     category: "",
-//     completedDate: "",
-//   },
-//   {
-//     id: "project3",
-//     title: "Weather Dashboard",
-//     description:
-//       "An interactive weather dashboard that displays current and forecasted weather data with beautiful visualizations and location-based services.",
-//     image: "/images/projects/project3.jpg",
-//     technologies: [
-//       "React",
-//       "Redux",
-//       "ChartJS",
-//       "OpenWeather API",
-//       "Styled Components",
-//     ],
-//     liveUrl: "https://weather-dashboard.example.com",
-//     githubUrl: "https://github.com/ShankarCourseraPersonal/weather-dashboard",
-//     featured: false,
-//     category: "",
-//     completedDate: "",
-//   },
-// ];
-
-/**
- * Project data for portfolio showcase
- * Last updated by ShankarCoursera: 2025-03-09 05:48:42
- */
-
 import { Project } from "../types/project.types";
 
 export const projects: Project[] = [
@@ -76,7 +15,7 @@ export const projects: Project[] = [
       "Node.js",
       "MongoDB",
     ],
-    githubUrl: null, // Assuming this is a private company project
+    githubUrl: null,
     liveUrl: "https://wizcart.com",
     featured: true,
     category: "fullstack",
@@ -146,10 +85,10 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "disney-clone",
-    title: "Disney+ Clone",
+    id: "hr-analytics-dashboard",
+    title: "HR Analytics Dashboard",
     description:
-      "A Disney+ clone built with React, Redux, and Firebase that uses redux-thunk to asynchronously fetch movie data of over 30,000 movies from the TMDB API. The application features a responsive UI that closely resembles the official Disney+ streaming platform.",
+      "The HR Analytics Dashboard is a professional dashboard built using React, Material-UI (MUI), and advanced JavaScript. It provides comprehensive analytics and insights for HR professionals. With its user-friendly interface and powerful features, the dashboard enables HR teams to effectively track and analyze various HR metrics, such as employee performance, recruitment data, training and development, and more. By leveraging the latest technologies and data visualization techniques, the HR Analytics Dashboard empowers organizations to make data-driven decisions and optimize their HR strategies. Whether you are a small business or a large enterprise, this dashboard is designed to meet your HR analytics needs and enhance your HR management capabilities.",
     image: "/images/projects/disney-clone.jpg",
     technologies: [
       "React",
@@ -159,12 +98,12 @@ export const projects: Project[] = [
       "CSS3",
       "TMDB API",
     ],
-    githubUrl: "https://github.com/gankit1/disney-clone",
-    liveUrl: "https://disney-clone-gankit1.vercel.app/",
+    githubUrl: "https://github.com/gankit1/hr-analytics-dashboard",
+    liveUrl: "https://hr-analytics-dashboard-gankit1.vercel.app/",
     featured: false,
     category: "frontend",
     completedDate: "2021-07-15",
-    duration: "2 months",
+    duration: "3 months",
     role: "Frontend Developer",
     // client: null,
     features: [
@@ -199,7 +138,7 @@ export const projects: Project[] = [
       "EmailJS",
     ],
     githubUrl: "https://github.com/gankit1/portfolio",
-    liveUrl: "https://ankitkumargupta.com",
+    liveUrl: "https://portfolio-gankit1s-projects.vercel.app/",
     featured: false,
     category: "frontend",
     completedDate: "2023-12-01",
