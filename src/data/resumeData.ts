@@ -54,7 +54,7 @@ export const personalInfo: PersonalInfo = {
 export const workExperience: WorkExperience[] = [
   {
     position: "SOFTWARE DEVELOPER",
-    company: "Consenko",
+    company: "Wizcart Technologies LLC",
     startDate: "01/2024",
     endDate: "Present",
     location: "Noida",
@@ -69,7 +69,7 @@ export const workExperience: WorkExperience[] = [
     ],
   },
   {
-    position: "FRONTEND DEVELOPER",
+    position: "SOFTWARE DEVELOPER",
     company: "Redcliffe Life Diagnostics",
     startDate: "04/2022",
     endDate: "10/2023",
@@ -160,6 +160,7 @@ export const skills: Skills = {
   technical: [
     "React JS",
     "Redux",
+    "Mobx",
     "TypeScript",
     "JavaScript",
     "Next Js",

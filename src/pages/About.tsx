@@ -94,7 +94,7 @@ const About = () => {
               </Typography>
 
               <Typography variant="body1" paragraph sx={{ mb: 2 }}>
-                I'm a passionate Frontend Developer with 3+ years of experience
+                I'm a passionate Software Developer with 3.5+ years of experience
                 specializing in creating responsive, user-friendly web
                 applications using React, TypeScript, and modern JavaScript
                 frameworks.

@@ -127,7 +127,7 @@ const Hero = () => {
                   color="textSecondary"
                   sx={{ mb: 4, maxWidth: "600px" }}
                 >
-                  Passionate and innovative front-end developer with 3+ years of
+                  Passionate and innovative front-end developer with 3.5+ years of
                   experience in crafting dynamic and responsive web
                   applications. Adept at utilizing the latest web technologies
                   and frameworks to deliver high-quality, user-centric

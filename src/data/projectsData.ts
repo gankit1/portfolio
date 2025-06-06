@@ -13,7 +13,7 @@ export const projects: Project[] = [
     image: W_logo,
     technologies: [
       "React",
-      "Redux",
+      "Mobx",
       "TypeScript",
       "Material UI",
       "Node.js",
@@ -25,8 +25,8 @@ export const projects: Project[] = [
     category: "fullstack",
     completedDate: "2024-01-15",
     duration: "3 months",
-    role: "Frontend Developer",
-    client: "Consenko",
+    role: "Software Developer",
+    client: "Wizcart Technologies LLC",
     features: [
       "Service provider search and filtering",
       "Real-time booking system",

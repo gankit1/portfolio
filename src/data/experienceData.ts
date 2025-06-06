@@ -3,8 +3,8 @@ import { Experience } from "../types/experience.types";
 export const experiences: Experience[] = [
   {
     id: "exp1",
-    role: "Frontend Development Engineer",
-    company: "Consenko",
+    role: "Software  Developer",
+    company: "Wizcart Technologies LLC",
     location: "Noida, Uttar Pradesh",
     startDate: "2024-01",
     endDate: null,
@@ -30,7 +30,7 @@ export const experiences: Experience[] = [
   },
   {
     id: "exp2",
-    role: "Frontend Developer",
+    role: "Software Developer",
     company: "Redcliffe Labs",
     location: "Noida, Uttar Pradesh",
     startDate: "2022-04",
@@ -75,6 +75,7 @@ export const experiences: Experience[] = [
       "TypeScript",
       "Redux",
       "Material UI",
+      "Mobx"
     ],
   },
 ];

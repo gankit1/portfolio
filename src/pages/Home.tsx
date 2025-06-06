@@ -47,7 +47,7 @@ const Home = () => {
             >
               <Box sx={{ mb: 4, lineHeight: 1.8 }}>
                 <p>
-                  I am a passionate Frontend Developer with over 3+ years of
+                  I am a passionate Software Developer with over 3.5+ years of
                   experience creating responsive and user-friendly web
                   applications. I specialize in modern JavaScript frameworks,
                   particularly React, along with TypeScript for type-safe code.
