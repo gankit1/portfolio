@@ -26,7 +26,7 @@ export const projects: Project[] = [
     completedDate: "2024-01-15",
     duration: "3 months",
     role: "Software Developer",
-    client: "Wizcart Technologies LLC",
+    client: "Wizcart Technologies India Pvt Ltd",
     features: [
       "Service provider search and filtering",
       "Real-time booking system",

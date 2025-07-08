@@ -4,7 +4,7 @@ export const experiences: Experience[] = [
   {
     id: "exp1",
     role: "Software  Developer",
-    company: "Wizcart Technologies LLC",
+    company: "Wizcart Technologies India Pvt Ltd",
     location: "Noida, Uttar Pradesh",
     startDate: "2024-01",
     endDate: null,

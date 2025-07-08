@@ -54,7 +54,7 @@ export const personalInfo: PersonalInfo = {
 export const workExperience: WorkExperience[] = [
   {
     position: "SOFTWARE DEVELOPER",
-    company: "Wizcart Technologies LLC",
+    company: "Wizcart Technologies India Pvt Ltd",
     startDate: "01/2024",
     endDate: "Present",
     location: "Noida",
