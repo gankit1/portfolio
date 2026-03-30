@@ -92,7 +92,7 @@ export const projects: Project[] = [
     id: "hr-analytics-dashboard",
     title: "HR Analytics Dashboard",
     description:
-      "The HR Analytics Dashboard is a professional dashboard built using React, Material-UI (MUI), and advanced JavaScript. It provides comprehensive analytics and insights for HR professionals. With its user-friendly interface and powerful features, the dashboard enables HR teams to effectively track and analyze various HR metrics, such as employee performance, recruitment data, training and development, and more. By leveraging the latest technologies and data visualization techniques, the HR Analytics Dashboard empowers organizations to make data-driven decisions and optimize their HR strategies. Whether you are a small business or a large enterprise, this dashboard is designed to meet your HR analytics needs and enhance your HR management capabilities.",
+      "The HR Analytics Dashboard is a professional dashboard built using React, Nextjs, Material-UI (MUI), and advanced JavaScript. It provides comprehensive analytics and insights for HR professionals. With its user-friendly interface and powerful features, the dashboard enables HR teams to effectively track and analyze various HR metrics, such as employee performance, recruitment data, training and development, and more. By leveraging the latest technologies and data visualization techniques, the HR Analytics Dashboard empowers organizations to make data-driven decisions and optimize their HR strategies. Whether you are a small business or a large enterprise, this dashboard is designed to meet your HR analytics needs and enhance your HR management capabilities.",
     image: H_logo,
     technologies: [
       "React",

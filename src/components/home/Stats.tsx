@@ -79,7 +79,7 @@ const Stats = () => {
     },
     {
       icon: <Psychology fontSize="large" />,
-      count: "3+",
+      count: "4+",
       label: "Years Experience",
       delay: 0.2,
     },
