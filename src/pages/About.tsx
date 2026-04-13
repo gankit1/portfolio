@@ -3,7 +3,6 @@ import {
   Container,
   Grid,
   Typography,
-  Paper,
   Button,
   Avatar,
   useTheme,
@@ -11,6 +10,7 @@ import {
 import SectionTitle from "../components/common/SectionTitle";
 import AnimatedSection from "../components/common/AnimatedSection";
 import SocialIcons from "../components/common/SocialIcons";
+import GlassCard from "../components/common/GlassCard";
 import {
   Timeline,
   TimelineItem,
@@ -20,11 +20,12 @@ import {
   TimelineDot,
   TimelineOppositeContent,
 } from "@mui/lab";
-import { School, Work } from "@mui/icons-material";
+import { School } from "@mui/icons-material";
 import ImagePreview from "../assets/images/profile.jpg";
 
 const About = () => {
   const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
 
   const education = [
     {
@@ -43,7 +44,15 @@ const About = () => {
   ];
 
   return (
-    <Box sx={{ py: { xs: 6, md: 10 } }}>
+    <Box
+      sx={{
+        pt: { xs: 12, md: 16 },
+        pb: { xs: 6, md: 10 },
+        background: isDark
+          ? "radial-gradient(ellipse at 50% 0%, rgba(41,123,180,0.04) 0%, transparent 60%)"
+          : "radial-gradient(ellipse at 50% 0%, rgba(41,123,180,0.03) 0%, transparent 60%)",
+      }}
+    >
       <Container maxWidth="lg">
         <AnimatedSection>
           <SectionTitle
@@ -52,8 +61,8 @@ const About = () => {
           />
         </AnimatedSection>
 
-        <Grid container spacing={4} alignItems="center" sx={{ mb: 8 }}>
-          <Grid item xs={12} md={5}>
+        <Grid container spacing={6} sx={{ alignItems: "center", mb: 10 }}>
+          <Grid size={{ xs: 12, md: 5 }}>
             <AnimatedSection direction="right">
               <Box
                 sx={{
@@ -61,46 +70,80 @@ const About = () => {
                   justifyContent: "center",
                 }}
               >
-                <Avatar
-                  src={ImagePreview}
-                  alt="Ankit K Gupta"
+                <Box
                   sx={{
-                    width: { xs: 250, md: 350 },
-                    height: { xs: 250, md: 350 },
-                    border: `5px solid ${theme.palette.primary.main}`,
-                    boxShadow: theme.shadows[10],
+                    position: "relative",
+                    "&::before": {
+                      content: '""',
+                      position: "absolute",
+                      inset: -6,
+                      borderRadius: "50%",
+                      background:
+                        "linear-gradient(135deg, #297BB4, #549DD4, #8CC4ED)",
+                      opacity: 0.15,
+                    },
                   }}
-                />
+                >
+                  <Avatar
+                    src={ImagePreview}
+                    alt="Ankit K Gupta"
+                    sx={{
+                      width: { xs: 240, md: 320 },
+                      height: { xs: 240, md: 320 },
+                      border: "4px solid",
+                      borderColor: isDark
+                        ? "rgba(41, 123, 180, 0.3)"
+                        : "rgba(41, 123, 180, 0.2)",
+                      boxShadow: "0 20px 60px rgba(41, 123, 180, 0.15)",
+                      position: "relative",
+                      zIndex: 1,
+                    }}
+                  />
+                </Box>
               </Box>
             </AnimatedSection>
           </Grid>
 
-          <Grid item xs={12} md={7}>
+          <Grid size={{ xs: 12, md: 7 }}>
             <AnimatedSection direction="left" delay={0.2}>
               <Typography
                 variant="h3"
                 component="h2"
-                sx={{ mb: 2, fontWeight: 700 }}
+                sx={{ mb: 1, fontWeight: 800 }}
               >
                 Ankit Kumar Gupta
               </Typography>
               <Typography
                 variant="h5"
                 component="h3"
-                color="primary"
-                sx={{ mb: 3 }}
+                sx={{
+                  mb: 3,
+                  fontWeight: 600,
+                  background: "linear-gradient(135deg, #297BB4, #549DD4)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  display: "inline-block",
+                }}
               >
                 Software Developer
               </Typography>
 
-              <Typography variant="body1" paragraph sx={{ mb: 2 }}>
+              <Typography
+                variant="body1"
+                component="p"
+                sx={{ mb: 2, color: theme.palette.text.secondary }}
+              >
                 I'm a passionate Software Developer with 4+ years of experience
                 specializing in creating responsive, user-friendly web
                 applications using React, Nextjs, TypeScript, and modern JavaScript
                 frameworks.
               </Typography>
 
-              <Typography variant="body1" paragraph sx={{ mb: 2 }}>
+              <Typography
+                variant="body1"
+                component="p"
+                sx={{ mb: 2, color: theme.palette.text.secondary }}
+              >
                 I believe in writing clean, maintainable code and staying
                 current with the latest web development trends and best
                 practices. My approach combines technical expertise with
@@ -108,17 +151,27 @@ const About = () => {
                 meet business requirements but also delight users.
               </Typography>
 
-              <Typography variant="body1" paragraph sx={{ mb: 3 }}>
+              <Typography
+                variant="body1"
+                component="p"
+                sx={{ mb: 4, color: theme.palette.text.secondary }}
+              >
                 Beyond coding, I enjoy contributing to open-source projects,
                 mentoring junior developers, and participating in tech
                 communities. I'm always looking for opportunities to learn and
                 grow both as a developer and as a person.
               </Typography>
 
-              <Box sx={{ display: "flex", gap: 2, mb: 3 }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: 2,
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                }}
+              >
                 <Button
                   variant="contained"
-                  color="primary"
                   size="large"
                   href={process.env.PUBLIC_URL + "resume.pdf"}
                   download="Ankit_Kumar_Gupta_Resume.pdf"
@@ -135,103 +188,121 @@ const About = () => {
 
         {/* Personal Info */}
         <AnimatedSection delay={0.3}>
-          <Paper
-            elevation={3}
-            sx={{
-              p: 4,
-              mb: 6,
-              borderRadius: 2,
-              backgroundColor: theme.palette.background.paper,
-            }}
-          >
+          <GlassCard hoverEffect={false} sx={{ p: { xs: 3, md: 4 }, mb: 8 }}>
             <Typography
               variant="h5"
               component="h3"
               gutterBottom
-              sx={{ fontWeight: 600 }}
+              sx={{ fontWeight: 700, mb: 3 }}
             >
               Personal Information
             </Typography>
 
-            <Grid container spacing={3} sx={{ mt: 2 }}>
-              <Grid item xs={12} sm={6} md={3}>
-                <Typography variant="subtitle2" color="text.secondary">
-                  Name
-                </Typography>
-                <Typography variant="body1" sx={{ fontWeight: 500 }}>
-                  Ankit Kumar Gupta
-                </Typography>
-              </Grid>
-
-              <Grid item xs={12} sm={6} md={3}>
-                <Typography variant="subtitle2" color="text.secondary">
-                  Email
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{
-                    fontWeight: 500,
-                    wordBreak: "break-all",
-                  }}
-                >
-                  ankit.gupta.sde@gmail.com
-                </Typography>
-              </Grid>
-
-              <Grid item xs={12} sm={6} md={3}>
-                <Typography variant="subtitle2" color="text.secondary">
-                  Location
-                </Typography>
-                <Typography variant="body1" sx={{ fontWeight: 500 }}>
-                  Noida Uttar Pradesh, India
-                </Typography>
-              </Grid>
-
-              <Grid item xs={12} sm={6} md={3}>
-                <Typography variant="subtitle2" color="text.secondary">
-                  Availability
-                </Typography>
-                <Typography variant="body1" sx={{ fontWeight: 500 }}>
-                  Open to opportunities
-                </Typography>
-              </Grid>
+            <Grid container spacing={3}>
+              {[
+                { label: "Name", value: "Ankit Kumar Gupta" },
+                { label: "Email", value: "ankit.gupta.sde@gmail.com" },
+                { label: "Location", value: "Noida Uttar Pradesh, India" },
+                { label: "Availability", value: "Open to opportunities" },
+              ].map((item) => (
+                <Grid key={item.label} size={{ xs: 12, sm: 6, md: 3 }}>
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      color: theme.palette.text.secondary,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.08em",
+                      fontWeight: 600,
+                      fontSize: "0.7rem",
+                    }}
+                  >
+                    {item.label}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      fontWeight: 600,
+                      mt: 0.5,
+                      wordBreak: item.label === "Email" ? "break-all" : "normal",
+                    }}
+                  >
+                    {item.value}
+                  </Typography>
+                </Grid>
+              ))}
             </Grid>
-          </Paper>
+          </GlassCard>
         </AnimatedSection>
 
         {/* Education */}
         <AnimatedSection delay={0.4}>
           <SectionTitle title="Education" align="left" />
 
-          <Timeline position="alternate">
+          <Timeline
+            position="alternate"
+            sx={{
+              "& .MuiTimelineItem-root:before": {
+                flex: { xs: 0, sm: 1 },
+              },
+            }}
+          >
             {education.map((edu, index) => (
               <TimelineItem key={index}>
-                <TimelineOppositeContent color="text.secondary">
+                <TimelineOppositeContent
+                  color="text.secondary"
+                  sx={{
+                    display: { xs: "none", sm: "block" },
+                    fontWeight: 500,
+                  }}
+                >
                   {edu.date}
                 </TimelineOppositeContent>
 
                 <TimelineSeparator>
-                  <TimelineDot color="primary">
+                  <TimelineDot
+                    sx={{
+                      background: "linear-gradient(135deg, #297BB4, #549DD4)",
+                      boxShadow: "0 4px 14px rgba(41, 123, 180, 0.3)",
+                    }}
+                  >
                     <School />
                   </TimelineDot>
-                  {index !== education.length - 1 && <TimelineConnector />}
+                  {index !== education.length - 1 && (
+                    <TimelineConnector
+                      sx={{
+                        background:
+                          "linear-gradient(180deg, #297BB4, rgba(41,123,180,0.2))",
+                      }}
+                    />
+                  )}
                 </TimelineSeparator>
 
                 <TimelineContent>
-                  <Paper
-                    elevation={2}
-                    sx={{
-                      p: 3,
-                      backgroundColor: theme.palette.background.paper,
-                    }}
-                  >
-                    <Typography variant="h6" component="h3">
+                  <GlassCard sx={{ p: 3 }}>
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                      sx={{
+                        display: { xs: "block", sm: "none" },
+                        mb: 1,
+                        fontWeight: 500,
+                      }}
+                    >
+                      {edu.date}
+                    </Typography>
+                    <Typography variant="h6" component="h3" sx={{ fontWeight: 700 }}>
                       {edu.institution}
                     </Typography>
                     <Typography
                       variant="body1"
-                      color="primary"
-                      sx={{ fontWeight: 500 }}
+                      sx={{
+                        fontWeight: 600,
+                        mt: 0.5,
+                        background: "linear-gradient(135deg, #297BB4, #549DD4)",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        display: "inline-block",
+                      }}
                     >
                       {edu.degree}
                     </Typography>
@@ -242,7 +313,7 @@ const About = () => {
                     >
                       {edu.description}
                     </Typography>
-                  </Paper>
+                  </GlassCard>
                 </TimelineContent>
               </TimelineItem>
             ))}

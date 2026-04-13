@@ -1,7 +1,8 @@
-import { Box, Typography, Paper, Grid, useTheme } from "@mui/material";
+import { Box, Typography, Grid, useTheme } from "@mui/material";
 import { Email, Phone, LocationOn } from "@mui/icons-material";
 import AnimatedSection from "../common/AnimatedSection";
 import SocialIcons from "../common/SocialIcons";
+import GlassCard from "../common/GlassCard";
 
 interface ContactItemProps {
   icon: React.ReactNode;
@@ -22,60 +23,62 @@ const ContactItem = ({
 
   return (
     <AnimatedSection delay={delay} direction="right">
-      <Paper
-        elevation={2}
-        sx={{
-          p: 3,
-          display: "flex",
-          alignItems: "center",
-          gap: 2,
-          transition: "transform 0.3s, box-shadow 0.3s",
-          "&:hover": {
-            transform: "translateY(-5px)",
-            boxShadow: theme.shadows[6],
-          },
-        }}
-      >
+      <GlassCard>
         <Box
           sx={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
-            width: 50,
-            height: 50,
-            borderRadius: "50%",
-            backgroundColor: theme.palette.primary.main,
-            color: theme.palette.primary.contrastText,
+            gap: 2.5,
           }}
         >
-          {icon}
-        </Box>
-        <Box>
-          <Typography variant="h6" component="h3">
-            {title}
-          </Typography>
-          {link ? (
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 48,
+              height: 48,
+              borderRadius: "14px",
+              background: "linear-gradient(135deg, #297BB4, #549DD4)",
+              color: "#fff",
+              flexShrink: 0,
+              boxShadow: "0 4px 14px rgba(41, 123, 180, 0.3)",
+            }}
+          >
+            {icon}
+          </Box>
+          <Box>
             <Typography
-              variant="body1"
-              component="a"
-              href={link}
-              sx={{
-                color: theme.palette.text.secondary,
-                textDecoration: "none",
-                "&:hover": {
-                  color: theme.palette.primary.main,
-                },
-              }}
+              variant="subtitle2"
+              component="h3"
+              sx={{ fontWeight: 700, mb: 0.25 }}
             >
-              {content}
+              {title}
             </Typography>
-          ) : (
-            <Typography variant="body1" color="text.secondary">
-              {content}
-            </Typography>
-          )}
+            {link ? (
+              <Typography
+                variant="body2"
+                component="a"
+                href={link}
+                sx={{
+                  color: theme.palette.text.secondary,
+                  textDecoration: "none",
+                  transition: "color 0.2s",
+                  "&:hover": {
+                    color: "#297BB4",
+                  },
+                }}
+              >
+                {content}
+              </Typography>
+            ) : (
+              <Typography variant="body2" color="text.secondary">
+                {content}
+              </Typography>
+            )}
+          </Box>
         </Box>
-      </Paper>
+      </GlassCard>
     </AnimatedSection>
   );
 };
@@ -83,8 +86,8 @@ const ContactItem = ({
 const ContactInfo = () => {
   return (
     <Box>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
+      <Grid container spacing={2.5}>
+        <Grid size={{ xs: 12 }}>
           <ContactItem
             icon={<Email />}
             title="Email"
@@ -94,7 +97,7 @@ const ContactInfo = () => {
           />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <ContactItem
             icon={<Phone />}
             title="Phone"
@@ -104,7 +107,7 @@ const ContactInfo = () => {
           />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <ContactItem
             icon={<LocationOn />}
             title="Location"
@@ -115,7 +118,16 @@ const ContactInfo = () => {
       </Grid>
 
       <Box sx={{ mt: 4, textAlign: "center" }}>
-        <Typography variant="h6" gutterBottom>
+        <Typography
+          variant="subtitle2"
+          sx={{
+            fontWeight: 700,
+            mb: 2,
+            textTransform: "uppercase",
+            letterSpacing: "0.08em",
+            fontSize: "0.75rem",
+          }}
+        >
           Connect With Me
         </Typography>
         <SocialIcons size="large" />

@@ -1,11 +1,22 @@
-import { Box, Container } from "@mui/material";
+import { Box, Container, useTheme } from "@mui/material";
 import SectionTitle from "../components/common/SectionTitle";
 import AnimatedSection from "../components/common/AnimatedSection";
 import ProjectsGrid from "../components/projects/ProjectsGrid";
 
 const Projects = () => {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+
   return (
-    <Box sx={{ py: { xs: 6, md: 10 } }}>
+    <Box
+      sx={{
+        pt: { xs: 12, md: 16 },
+        pb: { xs: 6, md: 10 },
+        background: isDark
+          ? "radial-gradient(ellipse at 70% 0%, rgba(139,92,246,0.04) 0%, transparent 60%)"
+          : "radial-gradient(ellipse at 70% 0%, rgba(139,92,246,0.03) 0%, transparent 60%)",
+      }}
+    >
       <Container maxWidth="lg">
         <AnimatedSection>
           <SectionTitle

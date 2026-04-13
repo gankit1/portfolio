@@ -1,6 +1,7 @@
-import { Grid, Paper, Box, Typography, useTheme } from "@mui/material";
+import { Grid, Box, Typography } from "@mui/material";
 import { Code, Psychology, Devices, DeveloperMode } from "@mui/icons-material";
 import AnimatedSection from "../common/AnimatedSection";
+import GlassCard from "../common/GlassCard";
 
 interface StatItemProps {
   icon: React.ReactNode;
@@ -10,61 +11,59 @@ interface StatItemProps {
 }
 
 const StatItem = ({ icon, count, label, delay }: StatItemProps) => {
-  const theme = useTheme();
 
   return (
     <AnimatedSection delay={delay}>
-      <Paper
-        elevation={2}
-        sx={{
-          p: 3,
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          transition: "transform 0.3s, box-shadow 0.3s",
-          "&:hover": {
-            transform: "translateY(-5px)",
-            boxShadow: theme.shadows[8],
-          },
-        }}
-      >
+      <GlassCard>
         <Box
           sx={{
-            mb: 2,
-            color: theme.palette.primary.main,
             display: "flex",
-            justifyContent: "center",
+            flexDirection: "column",
             alignItems: "center",
-            width: 60,
-            height: 60,
-            borderRadius: "50%",
-            backgroundColor:
-              theme.palette.mode === "dark"
-                ? "rgba(25, 118, 210, 0.1)"
-                : "rgba(25, 118, 210, 0.08)",
+            justifyContent: "center",
+            textAlign: "center",
+            py: 1,
           }}
         >
-          {icon}
+          <Box
+            sx={{
+              mb: 2,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: 56,
+              height: 56,
+              borderRadius: "14px",
+              background: "linear-gradient(135deg, rgba(41,123,180,0.12), rgba(139,92,246,0.08))",
+              color: "#297BB4",
+            }}
+          >
+            {icon}
+          </Box>
+
+          <Typography
+            variant="h3"
+            component="div"
+            sx={{
+              fontWeight: 800,
+              mb: 0.5,
+              background: "linear-gradient(135deg, #297BB4, #549DD4)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            {count}
+          </Typography>
+
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ fontWeight: 500 }}
+          >
+            {label}
+          </Typography>
         </Box>
-
-        <Typography
-          variant="h3"
-          component="div"
-          sx={{
-            fontWeight: 700,
-            mb: 1,
-          }}
-        >
-          {count}
-        </Typography>
-
-        <Typography variant="body1" color="text.secondary">
-          {label}
-        </Typography>
-      </Paper>
+      </GlassCard>
     </AnimatedSection>
   );
 };
@@ -98,10 +97,10 @@ const Stats = () => {
   ];
 
   return (
-    <Box sx={{ py: 6 }}>
+    <Box sx={{ py: 4 }}>
       <Grid container spacing={3}>
         {statsData.map((stat, index) => (
-          <Grid item xs={6} md={3} key={index}>
+          <Grid key={index} size={{ xs: 6, sm: 6, md: 3 }}>
             <StatItem
               icon={stat.icon}
               count={stat.count}

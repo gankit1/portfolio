@@ -1,6 +1,5 @@
 import { Box, IconButton, Tooltip, useTheme } from "@mui/material";
-import { GitHub, LinkedIn, Twitter, Email } from "@mui/icons-material";
-import ChangeHistoryIcon from "@mui/icons-material/ChangeHistory";
+import { GitHub, LinkedIn, Twitter, Email, Code, Article } from "@mui/icons-material";
 import { socialLinks } from "../../data/socialData";
 
 interface SocialIconsProps {
@@ -8,34 +7,32 @@ interface SocialIconsProps {
   size?: "small" | "medium" | "large";
 }
 
+// Centralized icon mapping — single source of truth
+const iconMap: Record<string, React.ReactElement> = {
+  GitHub: <GitHub />,
+  LinkedIn: <LinkedIn />,
+  Twitter: <Twitter />,
+  Email: <Email />,
+  Article: <Article />,
+  Code: <Code />,
+};
+
+export const getIconComponent = (iconName: string): React.ReactElement => {
+  return iconMap[iconName] || <Code />;
+};
+
 const SocialIcons = ({
   direction = "row",
   size = "medium",
 }: SocialIconsProps) => {
   const theme = useTheme();
 
-  // This function returns the appropriate icon component based on the icon name
-  const getIconComponent = (iconName: string) => {
-    switch (iconName) {
-      case "GitHub":
-        return <GitHub />;
-      case "LinkedIn":
-        return <LinkedIn />;
-      case "Twitter":
-        return <Twitter />;
-      case "Email":
-        return <Email />;
-      default:
-        return <ChangeHistoryIcon />;
-    }
-  };
-
   return (
     <Box
       sx={{
         display: "flex",
         flexDirection: direction,
-        gap: 1,
+        gap: 0.5,
       }}
     >
       {socialLinks.map((link) => (
@@ -48,10 +45,11 @@ const SocialIcons = ({
             size={size}
             sx={{
               color: theme.palette.text.secondary,
-              transition: "transform 0.2s, color 0.2s",
+              transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
               "&:hover": {
-                color: theme.palette.primary.main,
+                color: "#297BB4",
                 transform: "translateY(-3px)",
+                backgroundColor: "rgba(41, 123, 180, 0.08)",
               },
             }}
             aria-label={link.name}

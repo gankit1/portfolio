@@ -1,12 +1,12 @@
 import {
   Box,
-  Paper,
   Typography,
   useTheme,
   LinearProgress,
 } from "@mui/material";
 import { Skill } from "../../types/skill.types";
-import AnimatedSection from "../common/AnimatedSection";
+import { motion } from "framer-motion";
+import GlassCard from "../common/GlassCard";
 
 interface SkillCardProps {
   skill: Skill;
@@ -15,48 +15,59 @@ interface SkillCardProps {
 
 const SkillCard = ({ skill, index }: SkillCardProps) => {
   const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
 
   return (
-    <AnimatedSection delay={index * 0.1} direction="up">
-      <Paper
-        elevation={2}
-        sx={{
-          p: 3,
-          height: "100%",
-          transition: "transform 0.3s ease, box-shadow 0.3s ease",
-          "&:hover": {
-            transform: "translateY(-5px)",
-            boxShadow: theme.shadows[6],
-          },
-        }}
-      >
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{
+        duration: 0.5,
+        delay: index * 0.05,
+        ease: [0.25, 0.46, 0.45, 0.94],
+      }}
+    >
+      <GlassCard>
         <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
           <Box
             sx={{
-              width: 50,
-              height: 50,
+              width: 44,
+              height: 44,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              borderRadius: "50%",
-              backgroundColor:
-                theme.palette.mode === "dark"
-                  ? "rgba(25, 118, 210, 0.1)"
-                  : "rgba(25, 118, 210, 0.08)",
+              borderRadius: "12px",
+              background:
+                "linear-gradient(135deg, rgba(41,123,180,0.12), rgba(139,92,246,0.08))",
               mr: 2,
+              flexShrink: 0,
             }}
           >
-            {/* You could use actual SVGs or icon components here */}
             <Typography
-              variant="body1"
-              color="primary"
-              sx={{ fontWeight: "bold", textTransform: "uppercase" }}
+              variant="body2"
+              sx={{
+                fontWeight: 700,
+                background: "linear-gradient(135deg, #297BB4, #549DD4)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: "0.75rem",
+              }}
             >
-              {skill.name.substring(0, 2)}
+              {skill.name.substring(0, 2).toUpperCase()}
             </Typography>
           </Box>
-          <Box>
-            <Typography variant="h6" component="h3" gutterBottom>
+          <Box sx={{ flex: 1, minWidth: 0 }}>
+            <Typography
+              variant="h6"
+              component="h3"
+              sx={{
+                fontWeight: 700,
+                fontSize: "0.95rem",
+                mb: 0.5,
+              }}
+            >
               {skill.name}
             </Typography>
             <Box sx={{ width: "100%" }}>
@@ -67,10 +78,21 @@ const SkillCard = ({ skill, index }: SkillCardProps) => {
                   mb: 0.5,
                 }}
               >
-                <Typography variant="body2" color="text.secondary">
+                <Typography
+                  variant="caption"
+                  color="text.secondary"
+                  sx={{ fontWeight: 500 }}
+                >
                   Proficiency
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography
+                  variant="caption"
+                  sx={{
+                    fontWeight: 700,
+                    color: "#297BB4",
+                    fontFamily: "'JetBrains Mono', monospace",
+                  }}
+                >
                   {skill.level}%
                 </Typography>
               </Box>
@@ -80,20 +102,21 @@ const SkillCard = ({ skill, index }: SkillCardProps) => {
                 sx={{
                   height: 6,
                   borderRadius: 3,
-                  backgroundColor:
-                    theme.palette.mode === "dark"
-                      ? "rgba(255, 255, 255, 0.1)"
-                      : "rgba(0, 0, 0, 0.1)",
+                  backgroundColor: isDark
+                    ? "rgba(255, 255, 255, 0.06)"
+                    : "rgba(41, 123, 180, 0.08)",
                   "& .MuiLinearProgress-bar": {
                     borderRadius: 3,
+                    background:
+                      "linear-gradient(90deg, #297BB4, #549DD4)",
                   },
                 }}
               />
             </Box>
           </Box>
         </Box>
-      </Paper>
-    </AnimatedSection>
+      </GlassCard>
+    </motion.div>
   );
 };
 

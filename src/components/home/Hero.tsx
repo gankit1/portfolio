@@ -9,14 +9,38 @@ import {
   IconButton,
 } from "@mui/material";
 import { KeyboardArrowDown } from "@mui/icons-material";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Link as RouterLink } from "react-router-dom";
 import SocialIcons from "../common/SocialIcons";
 import ImagePreview from "../../assets/images/profile.jpg";
-import BgImgae from "../../assets/images/hero-bg.jpg";
+
+const floatingOrb: Variants = {
+  animate: {
+    y: [0, -20, 0],
+    x: [0, 10, 0],
+    transition: {
+      duration: 6,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const floatingOrb2: Variants = {
+  animate: {
+    y: [0, 15, 0],
+    x: [0, -15, 0],
+    transition: {
+      duration: 8,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+};
 
 const Hero = () => {
   const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
 
   const scrollToNext = () => {
     const nextSection = document.getElementById("about-section");
@@ -29,50 +53,68 @@ const Hero = () => {
     <Box
       sx={{
         position: "relative",
-        height: "100vh",
+        minHeight: "100vh",
         display: "flex",
         alignItems: "center",
         overflow: "hidden",
-        backgroundColor: theme.palette.background.default,
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.${
-          theme.palette.mode === "dark" ? "7" : "0"
-        }), rgba(0, 0, 0, 0.${
-          theme.palette.mode === "dark" ? "7" : "0"
-        })), url(${BgImgae})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        "&::before": {
-          content: '""',
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor:
-            theme.palette.mode === "dark"
-              ? "rgba(0, 0, 0, 0.7)"
-              : "rgba(245, 245, 245, 0.9)",
-          zIndex: 1,
-        },
+        background: isDark
+          ? "radial-gradient(ellipse at 20% 50%, rgba(41, 123, 180, 0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(139, 92, 246, 0.06) 0%, transparent 50%), #0B1120"
+          : "radial-gradient(ellipse at 20% 50%, rgba(41, 123, 180, 0.06) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(139, 92, 246, 0.04) 0%, transparent 50%), #FAFBFF",
+        pt: { xs: 10, md: 0 },
       }}
     >
+      {/* Floating orbs */}
+      <Box
+        component={motion.div}
+        variants={floatingOrb}
+        animate="animate"
+        sx={{
+          position: "absolute",
+          top: "15%",
+          right: "10%",
+          width: { xs: 200, md: 350 },
+          height: { xs: 200, md: 350 },
+          borderRadius: "50%",
+          background: "linear-gradient(135deg, rgba(41,123,180,0.1), rgba(139,92,246,0.05))",
+          filter: "blur(60px)",
+          zIndex: 0,
+        }}
+      />
+      <Box
+        component={motion.div}
+        variants={floatingOrb2}
+        animate="animate"
+        sx={{
+          position: "absolute",
+          bottom: "20%",
+          left: "5%",
+          width: { xs: 150, md: 250 },
+          height: { xs: 150, md: 250 },
+          borderRadius: "50%",
+          background: "linear-gradient(135deg, rgba(249,115,22,0.08), rgba(41,123,180,0.05))",
+          filter: "blur(60px)",
+          zIndex: 0,
+        }}
+      />
+
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
-        <Grid container spacing={4} alignItems="center">
-          <Grid item xs={12} md={7}>
+        <Grid container spacing={6} sx={{ alignItems: "center" }}>
+          <Grid size={{ xs: 12, md: 7 }}>
             <Box>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
               >
                 <Typography
                   variant="subtitle1"
-                  color="primary"
                   sx={{
                     fontWeight: 600,
-                    mb: 1,
-                    letterSpacing: 2,
+                    mb: 1.5,
+                    letterSpacing: "0.15em",
                     textTransform: "uppercase",
+                    fontSize: "0.85rem",
+                    color: "#297BB4",
                   }}
                 >
                   Hello, I'm
@@ -82,15 +124,21 @@ const Hero = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.15,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                }}
               >
                 <Typography
                   variant="h1"
                   sx={{
-                    fontWeight: 800,
-                    mb: 2,
-                    fontSize: { xs: "2.5rem", md: "3.5rem" },
-                    background: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                    fontWeight: 900,
+                    mb: 1.5,
+                    background:
+                      "linear-gradient(135deg, #297BB4 0%, #549DD4 50%, #8CC4ED 100%)",
+                    backgroundSize: "200% 200%",
+                    animation: "gradient-shift 4s ease infinite",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}
@@ -102,15 +150,19 @@ const Hero = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.3,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                }}
               >
                 <Typography
-                  variant="h2"
-                  color="textSecondary"
+                  variant="h3"
+                  color="text.secondary"
                   sx={{
                     fontWeight: 500,
                     mb: 3,
-                    fontSize: { xs: "1.5rem", md: "2rem" },
+                    fontSize: { xs: "1.25rem", md: "1.75rem" },
                   }}
                 >
                   Software Developer
@@ -120,12 +172,16 @@ const Hero = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.45,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                }}
               >
                 <Typography
                   variant="body1"
-                  color="textSecondary"
-                  sx={{ mb: 4, maxWidth: "600px" }}
+                  color="text.secondary"
+                  sx={{ mb: 4, maxWidth: "560px", lineHeight: 1.8 }}
                 >
                   Passionate and innovative front-end developer with 4+ years of
                   experience in crafting dynamic and responsive web
@@ -141,15 +197,18 @@ const Hero = () => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.8 }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.6,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                }}
               >
-                <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
+                <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", mb: 4 }}>
                   <Button
                     component={RouterLink}
                     to="/projects"
                     variant="contained"
                     size="large"
-                    color="primary"
                   >
                     View My Work
                   </Button>
@@ -158,7 +217,6 @@ const Hero = () => {
                     to="/contact"
                     variant="outlined"
                     size="large"
-                    color="primary"
                   >
                     Contact Me
                   </Button>
@@ -168,39 +226,54 @@ const Hero = () => {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 1 }}
+                transition={{ duration: 0.6, delay: 0.75 }}
               >
-                <Box sx={{ mt: 4 }}>
-                  <SocialIcons />
-                </Box>
+                <SocialIcons />
               </motion.div>
             </Box>
           </Grid>
 
-          <Grid
-            item
-            xs={12}
-            md={5}
-            sx={{
-              display: { xs: "none", md: "flex" },
-              justifyContent: "center",
-            }}
-          >
+          <Grid sx={{ display: "flex", justifyContent: "center", }} size={{ xs: 12, md: 5 }}>
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{
+                duration: 0.8,
+                delay: 0.3,
+                ease: [0.25, 0.46, 0.45, 0.94],
+              }}
             >
-              <Avatar
-                src={ImagePreview}
-                alt="Profile Image"
+              <Box
                 sx={{
-                  width: 300,
-                  height: 300,
-                  border: `5px solid ${theme.palette.primary.main}`,
-                  boxShadow: theme.shadows[10],
+                  position: "relative",
+                  "&::before": {
+                    content: '""',
+                    position: "absolute",
+                    inset: -8,
+                    borderRadius: "50%",
+                    background:
+                      "linear-gradient(135deg, #297BB4, #549DD4, #8CC4ED)",
+                    opacity: 0.2,
+                    animation: "pulse-glow 3s ease-in-out infinite",
+                  },
                 }}
-              />
+              >
+                <Avatar
+                  src={ImagePreview}
+                  alt="Ankit Kumar Gupta"
+                  sx={{
+                    width: { xs: 220, sm: 260, md: 320 },
+                    height: { xs: 220, sm: 260, md: 320 },
+                    border: "4px solid",
+                    borderColor: isDark
+                      ? "rgba(41, 123, 180, 0.4)"
+                      : "rgba(41, 123, 180, 0.3)",
+                    boxShadow: "0 20px 60px rgba(41, 123, 180, 0.2)",
+                    position: "relative",
+                    zIndex: 1,
+                  }}
+                />
+              </Box>
             </motion.div>
           </Grid>
         </Grid>
@@ -216,21 +289,27 @@ const Hero = () => {
         }}
       >
         <motion.div
-          animate={{ y: [0, 10, 0] }}
+          animate={{ y: [0, 8, 0] }}
           transition={{
             repeat: Infinity,
-            duration: 1.5,
+            duration: 2,
             ease: "easeInOut",
           }}
         >
           <IconButton
             onClick={scrollToNext}
             sx={{
-              color: theme.palette.primary.main,
-              backgroundColor: theme.palette.background.paper,
-              boxShadow: theme.shadows[4],
+              color: "#297BB4",
+              backgroundColor: isDark
+                ? "rgba(41, 123, 180, 0.1)"
+                : "rgba(41, 123, 180, 0.08)",
+              backdropFilter: "blur(8px)",
+              border: "1px solid",
+              borderColor: isDark
+                ? "rgba(41, 123, 180, 0.2)"
+                : "rgba(41, 123, 180, 0.15)",
               "&:hover": {
-                backgroundColor: theme.palette.background.default,
+                backgroundColor: "rgba(41, 123, 180, 0.15)",
               },
             }}
           >

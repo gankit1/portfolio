@@ -1,5 +1,5 @@
 import { useState, ReactNode } from "react";
-import { Box, CssBaseline, useScrollTrigger, useTheme } from "@mui/material";
+import { Box, CssBaseline, useTheme } from "@mui/material";
 import Header from "./Header";
 import Footer from "./Footer";
 import MobileNav from "./MobileNav";
@@ -23,6 +23,7 @@ const Layout = ({ children }: LayoutProps) => {
         flexDirection: "column",
         minHeight: "100vh",
         bgcolor: theme.palette.background.default,
+        transition: "background-color 0.3s ease",
       }}
     >
       <CssBaseline />
@@ -32,7 +33,6 @@ const Layout = ({ children }: LayoutProps) => {
         component="main"
         sx={{
           flexGrow: 1,
-          pt: { xs: 8, md: 12 },
         }}
       >
         {children}

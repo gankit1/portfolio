@@ -9,13 +9,13 @@ import {
   Fab,
   Zoom,
 } from "@mui/material";
-import { GitHub, LinkedIn, Twitter, Email } from "@mui/icons-material";
-import ChangeHistoryIcon from "@mui/icons-material/ChangeHistory";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Link as RouterLink } from "react-router-dom";
 import { socialLinks } from "../../data/socialData";
 import { useState, useEffect } from "react";
 import useScrollToTop from "../../hooks/useScrollToTop";
+import Logo from "../common/Logo";
+import { getIconComponent } from "../common/SocialIcons";
 
 const Footer = () => {
   const theme = useTheme();
@@ -54,28 +54,12 @@ const Footer = () => {
     },
   ];
 
-  // This function returns the appropriate icon component based on the icon name
-  const getIconComponent = (iconName: string) => {
-    switch (iconName) {
-      case "GitHub":
-        return <GitHub />;
-      case "LinkedIn":
-        return <LinkedIn />;
-      case "Twitter":
-        return <Twitter />;
-      case "Email":
-        return <Email />;
-      default:
-        return <ChangeHistoryIcon />;
-    }
-  };
-
   // Check if we should show scroll to top button (user has scrolled down)
   useEffect(() => {
     const checkScrollHeight = () => {
       setShowScrollTop(window.scrollY > 300);
     };
-    window.addEventListener("scroll", checkScrollHeight);
+    window.addEventListener("scroll", checkScrollHeight, { passive: true });
     checkScrollHeight();
     return () => {
       window.removeEventListener("scroll", checkScrollHeight);
@@ -92,9 +76,12 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        backgroundColor: theme.palette.background.paper,
-        py: 6,
-        mt: 8,
+        background:
+          theme.palette.mode === "dark"
+            ? "linear-gradient(180deg, rgba(11,17,32,0) 0%, rgba(11,17,32,1) 20%)"
+            : "linear-gradient(180deg, rgba(250,251,255,0) 0%, rgba(241,245,249,1) 20%)",
+        py: 8,
+        mt: 4,
         position: "relative",
       }}
       component="footer"
@@ -102,15 +89,22 @@ const Footer = () => {
       {/* Scroll to top button */}
       <Zoom in={showScrollTop}>
         <Fab
-          color="primary"
           size="small"
           aria-label="scroll back to top"
           onClick={handleScrollToTop}
           sx={{
-            position: "absolute",
-            top: -28,
+            position: "fixed",
+            bottom: 32,
             right: 32,
-            boxShadow: theme.shadows[3],
+            background: "linear-gradient(135deg, #297BB4, #549DD4)",
+            color: "#fff",
+            boxShadow: "0 4px 14px rgba(41, 123, 180, 0.4)",
+            "&:hover": {
+              background: "linear-gradient(135deg, #1E5D87, #3A8AC9)",
+              boxShadow: "0 6px 20px rgba(41, 123, 180, 0.6)",
+              transform: "translateY(-2px)",
+            },
+            transition: "all 0.3s ease",
           }}
         >
           <KeyboardArrowUpIcon />
@@ -118,48 +112,23 @@ const Footer = () => {
       </Zoom>
 
       <Container maxWidth="lg">
-        <Grid container spacing={4} justifyContent="space-between">
+        <Grid container spacing={4} sx={{ justifyContent: "space-between" }}>
           {/* Logo and tagline */}
-          <Grid item xs={12} md={4}>
+          <Grid size={{ xs: 12, md: 4 }}>
+            <Box sx={{ mb: 2 }}>
+              <Logo />
+            </Box>
             <Typography
-              variant="h6"
-              component={RouterLink}
-              to="/"
-              sx={{
-                color: theme.palette.text.primary,
-                fontWeight: 700,
-                textDecoration: "none",
-                display: "flex",
-                alignItems: "center",
-                mb: 2,
-              }}
+              variant="body2"
+              color="text.secondary"
+              sx={{ mb: 3, maxWidth: 280, lineHeight: 1.8 }}
             >
-              <Box
-                component="span"
-                sx={{
-                  color: theme.palette.primary.main,
-                  marginRight: "0.2rem",
-                }}
-              >
-                &lt;
-              </Box>
-              Portfolio
-              <Box
-                component="span"
-                sx={{
-                  color: theme.palette.primary.main,
-                }}
-              >
-                /&gt;
-              </Box>
-            </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
               A showcase of my skills, projects, and professional journey in web
               development.
             </Typography>
 
             {/* Social links */}
-            <Box sx={{ display: "flex", gap: 1, mb: 2 }}>
+            <Box sx={{ display: "flex", gap: 0.5 }}>
               {socialLinks.map((link) => (
                 <IconButton
                   key={link.id}
@@ -170,8 +139,11 @@ const Footer = () => {
                   size="small"
                   sx={{
                     color: theme.palette.text.secondary,
+                    transition: "all 0.3s ease",
                     "&:hover": {
-                      color: theme.palette.primary.main,
+                      color: "#297BB4",
+                      backgroundColor: "rgba(41, 123, 180, 0.08)",
+                      transform: "translateY(-2px)",
                     },
                   }}
                 >
@@ -183,23 +155,36 @@ const Footer = () => {
 
           {/* Navigation Sections */}
           {footerSections.map((section) => (
-            <Grid item xs={6} md={3} key={section.title}>
-              <Typography variant="h6" color="text.primary" gutterBottom>
+            <Grid key={section.title} size={{ xs: 6, md: 3 }}>
+              <Typography
+                variant="subtitle2"
+                color="text.primary"
+                sx={{
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em",
+                  fontSize: "0.75rem",
+                  mb: 2.5,
+                }}
+              >
                 {section.title}
               </Typography>
               <Box component="ul" sx={{ listStyle: "none", p: 0, m: 0 }}>
                 {section.links.map((link) => (
-                  <Box component="li" key={link.name} sx={{ mb: 1 }}>
+                  <Box component="li" key={link.name} sx={{ mb: 1.5 }}>
                     {"external" in link && link.external ? (
                       <Link
                         href={link.path}
                         target="_blank"
                         rel="noopener noreferrer"
                         color="text.secondary"
-                        underline="hover"
+                        underline="none"
                         sx={{
+                          fontSize: "0.9rem",
+                          transition: "all 0.2s ease",
                           "&:hover": {
-                            color: theme.palette.primary.main,
+                            color: "#297BB4",
+                            paddingLeft: "4px",
                           },
                         }}
                       >
@@ -210,10 +195,13 @@ const Footer = () => {
                         component={RouterLink}
                         to={link.path}
                         color="text.secondary"
-                        underline="hover"
+                        underline="none"
                         sx={{
+                          fontSize: "0.9rem",
+                          transition: "all 0.2s ease",
                           "&:hover": {
-                            color: theme.palette.primary.main,
+                            color: "#297BB4",
+                            paddingLeft: "4px",
                           },
                         }}
                         onClick={() => {
@@ -235,28 +223,20 @@ const Footer = () => {
         </Grid>
 
         <Box
-          sx={{ pt: 4, borderTop: `1px solid ${theme.palette.divider}`, mt: 4 }}
+          sx={{
+            pt: 5,
+            mt: 5,
+            borderTop: `1px solid ${theme.palette.mode === "dark" ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}`,
+            textAlign: "center",
+          }}
         >
-          <Typography variant="body2" color="text.secondary" align="center">
-            © {year} My Portfolio. All rights reserved. Designed & Built by
-            Ankit K Gupta.
-          </Typography>
-
-          {/* Extra scroll to top text link at bottom */}
           <Typography
             variant="body2"
-            color="primary"
-            align="center"
-            sx={{
-              mt: 1,
-              cursor: "pointer",
-              "&:hover": {
-                textDecoration: "underline",
-              },
-            }}
-            onClick={handleScrollToTop}
+            color="text.secondary"
+            sx={{ fontSize: "0.85rem" }}
           >
-            Back to top
+            © {year} My Portfolio. All rights reserved. Designed & Built by
+            Ankit K Gupta.
           </Typography>
         </Box>
       </Container>

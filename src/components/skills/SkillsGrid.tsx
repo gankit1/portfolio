@@ -10,28 +10,9 @@ import {
 } from "@mui/material";
 import { skills } from "../../data/skillsData";
 import SkillCard from "./SkillCard";
+import TabPanel from "../common/TabPanel";
 
 type SkillCategory = "all" | "frontend" | "backend" | "tools" | "other";
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function TabPanel({ children, value, index, ...other }: TabPanelProps) {
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`skills-tabpanel-${index}`}
-      aria-labelledby={`skills-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ py: 3 }}>{children}</Box>}
-    </div>
-  );
-}
 
 const SkillsGrid = () => {
   const theme = useTheme();
@@ -59,17 +40,37 @@ const SkillsGrid = () => {
 
   return (
     <Box>
-      <Box sx={{ borderBottom: 1, borderColor: "divider", mb: 3 }}>
+      <Box
+        sx={{
+          mb: 4,
+          display: "flex",
+          justifyContent: isMobile ? "flex-start" : "center",
+        }}
+      >
         <Tabs
           value={tabValue}
           onChange={handleTabChange}
           variant={isMobile ? "scrollable" : "standard"}
           scrollButtons={isMobile ? "auto" : undefined}
           allowScrollButtonsMobile
-          centered={!isMobile}
-          TabIndicatorProps={{
-            style: {
-              backgroundColor: theme.palette.primary.main,
+          sx={{
+            "& .MuiTab-root": {
+              fontWeight: 600,
+              textTransform: "none",
+              minWidth: isMobile ? "auto" : 100,
+              fontSize: "0.9rem",
+              borderRadius: "10px",
+              mx: 0.5,
+              py: 1,
+              transition: "all 0.2s",
+              color: theme.palette.text.secondary,
+              "&.Mui-selected": {
+                color: "#297BB4",
+                backgroundColor: "rgba(41, 123, 180, 0.08)",
+              },
+            },
+            "& .MuiTabs-indicator": {
+              display: "none",
             },
           }}
         >
@@ -79,11 +80,6 @@ const SkillsGrid = () => {
               label={category.label}
               id={`skills-tab-${index}`}
               aria-controls={`skills-tabpanel-${index}`}
-              sx={{
-                fontWeight: 600,
-                textTransform: "none",
-                minWidth: isMobile ? "auto" : 120,
-              }}
             />
           ))}
         </Tabs>
@@ -93,11 +89,11 @@ const SkillsGrid = () => {
         const filteredSkills = filterSkills(category.value);
 
         return (
-          <TabPanel key={category.value} value={tabValue} index={index}>
+          <TabPanel key={category.value} value={tabValue} index={index} id="skills">
             {filteredSkills.length > 0 ? (
               <Grid container spacing={3}>
                 {filteredSkills.map((skill, idx) => (
-                  <Grid item xs={12} sm={6} md={4} key={skill.id}>
+                  <Grid key={skill.id} size={{ xs: 12, sm: 6, md: 4 }}>
                     <SkillCard skill={skill} index={idx} />
                   </Grid>
                 ))}

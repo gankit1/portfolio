@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box, BoxProps } from "@mui/material";
-import useIntersectionObserver from "../../hooks/useIntersectionObserver";
+import { motion, Variants } from "framer-motion";
 
 interface AnimatedSectionProps extends BoxProps {
   children: React.ReactNode;
@@ -10,52 +10,52 @@ interface AnimatedSectionProps extends BoxProps {
   duration?: number;
 }
 
+const getVariants = (direction: string): Variants => {
+  const offsets: Record<string, { x?: number; y?: number }> = {
+    up: { y: 40 },
+    down: { y: -40 },
+    left: { x: 40 },
+    right: { x: -40 },
+  };
+
+  const offset = offsets[direction] || offsets.up;
+
+  return {
+    hidden: {
+      opacity: 0,
+      ...offset,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+    },
+  };
+};
+
 const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   children,
   delay = 0,
   direction = "up",
-  threshold = 0.1,
-  duration = 0.5,
+  threshold = 0.15,
+  duration = 0.6,
   ...boxProps
 }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [ref, inView] = useIntersectionObserver<HTMLDivElement>({
-    threshold,
-    rootMargin: "0px",
-  });
-
-  useEffect(() => {
-    if (inView) {
-      setIsVisible(true);
-    }
-  }, [inView]);
-
-  // Define transform values based on direction
-  const getInitialTransform = () => {
-    switch (direction) {
-      case "up":
-        return "translateY(30px)";
-      case "down":
-        return "translateY(-30px)";
-      case "left":
-        return "translateX(30px)";
-      case "right":
-        return "translateX(-30px)";
-      default:
-        return "translateY(30px)";
-    }
-  };
+  const variants = getVariants(direction);
 
   return (
     <Box
-      ref={ref}
-      sx={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translate(0, 0)" : getInitialTransform(),
-        transition: `opacity ${duration}s ease-out ${delay}s, transform ${duration}s ease-out ${delay}s`,
-        ...boxProps.sx,
+      component={motion.div}
+      variants={variants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: threshold }}
+      transition={{
+        duration,
+        delay,
+        ease: [0.25, 0.46, 0.45, 0.94],
       }}
-      {...boxProps}
+      {...(boxProps as any)}
     >
       {children}
     </Box>

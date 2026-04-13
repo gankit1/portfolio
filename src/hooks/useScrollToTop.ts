@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 
 interface ScrollToTopOptions {
@@ -15,23 +15,21 @@ const useScrollToTop = (options: ScrollToTopOptions = {}): void => {
   const { smooth = true, deps = [], scrollOnRouteChange = true } = options;
   const location = useLocation();
 
-  // Function to scroll to top
-  const scrollToTop = () => {
-    const scrollOptions: ScrollToOptions = {
+  // Function to scroll to top — stable with useCallback
+  const scrollToTop = useCallback(() => {
+    window.scrollTo({
       top: 0,
       left: 0,
       behavior: smooth ? "smooth" : "auto",
-    };
-
-    window.scrollTo(scrollOptions);
-  };
+    });
+  }, [smooth]);
 
   // Scroll on route change if enabled
   useEffect(() => {
     if (scrollOnRouteChange) {
       scrollToTop();
     }
-  }, [location.pathname, scrollOnRouteChange]);
+  }, [location.pathname, scrollOnRouteChange, scrollToTop]);
 
   // Scroll when dependencies change
   useEffect(() => {

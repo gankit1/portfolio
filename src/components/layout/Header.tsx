@@ -3,13 +3,11 @@ import { Link as RouterLink, useLocation } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
-  Typography,
   Button,
   IconButton,
   useMediaQuery,
   useTheme,
   Box,
-  Slide,
   Container,
 } from "@mui/material";
 import {
@@ -18,20 +16,8 @@ import {
   Brightness7,
 } from "@mui/icons-material";
 import { useThemeContext } from "../../context/ThemeContext";
-
-interface NavItem {
-  label: string;
-  path: string;
-}
-
-const navItems: NavItem[] = [
-  { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
-  { label: "Skills", path: "/skills" },
-  { label: "Projects", path: "/projects" },
-  { label: "Experience", path: "/experience" },
-  { label: "Contact", path: "/contact" },
-];
+import { navItems } from "../../constants/navigation";
+import Logo from "../common/Logo";
 
 const Header = ({ toggleDrawer }: { toggleDrawer: () => void }) => {
   const { mode, toggleThemeMode } = useThemeContext();
@@ -42,144 +28,113 @@ const Header = ({ toggleDrawer }: { toggleDrawer: () => void }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 20;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
+      setScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [scrolled]);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <Slide appear={false} direction="down" in={!scrolled}>
-      <AppBar
-        position="fixed"
-        elevation={scrolled ? 4 : 0}
-        sx={{
-          backgroundColor: theme.palette.background.default,
-          transition: "all 0.3s ease-in-out",
-          boxShadow: scrolled ? theme.shadows[4] : "none",
-          borderBottom: scrolled
-            ? "none"
-            : `1px solid ${theme.palette.divider}`,
-        }}
-      >
-        <Container maxWidth="lg">
-          <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
-            <Typography
-              variant="h6"
-              component={RouterLink}
-              to="/"
-              sx={{
-                color: theme.palette.text.primary,
-                fontWeight: 700,
-                textDecoration: "none",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <Box
-                component="span"
-                sx={{
-                  color: theme.palette.primary.main,
-                  marginRight: "0.2rem",
-                }}
-              >
-                &lt;
-              </Box>
-              Portfolio
-              <Box
-                component="span"
-                sx={{
-                  color: theme.palette.primary.main,
-                }}
-              >
-                /&gt;
-              </Box>
-            </Typography>
+    <AppBar
+      position="fixed"
+      elevation={0}
+      sx={{
+        backgroundColor: scrolled
+          ? theme.palette.mode === "dark"
+            ? "rgba(11, 17, 32, 0.85)"
+            : "rgba(250, 251, 255, 0.85)"
+          : "transparent",
+        backdropFilter: scrolled ? "blur(16px) saturate(180%)" : "none",
+        transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+        borderBottom: scrolled
+          ? `1px solid ${theme.palette.mode === "dark" ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}`
+          : "none",
+      }}
+    >
+      <Container maxWidth="lg">
+        <Toolbar
+          disableGutters
+          sx={{
+            justifyContent: "space-between",
+            minHeight: { xs: 64, md: 72 },
+          }}
+        >
+          <Logo />
 
-            {isMobile ? (
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <IconButton
-                  edge="end"
-                  color="inherit"
-                  aria-label="toggle theme"
-                  onClick={toggleThemeMode}
-                  sx={{ mr: 1 }}
-                >
-                  {mode === "dark" ? (
-                    <Brightness7 sx={{ color: theme.palette.text.primary }} />
-                  ) : (
-                    <Brightness4 sx={{ color: theme.palette.text.primary }} />
-                  )}
-                </IconButton>
-                <IconButton
-                  color="inherit"
-                  aria-label="open drawer"
-                  edge="end"
-                  onClick={toggleDrawer}
-                >
-                  <MenuIcon sx={{ color: theme.palette.text.primary }} />
-                </IconButton>
+          {isMobile ? (
+            <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+              <IconButton
+                aria-label="toggle theme"
+                onClick={toggleThemeMode}
+                sx={{
+                  color: theme.palette.text.primary,
+                  transition: "transform 0.3s",
+                  "&:hover": { transform: "rotate(30deg)" },
+                }}
+              >
+                {mode === "dark" ? <Brightness7 /> : <Brightness4 />}
+              </IconButton>
+              <IconButton
+                aria-label="open drawer"
+                edge="end"
+                onClick={toggleDrawer}
+                sx={{ color: theme.palette.text.primary }}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Box>
+          ) : (
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Box sx={{ display: "flex", gap: 0.5 }}>
+                {navItems.map((item) => (
+                  <Button
+                    key={item.path}
+                    component={RouterLink}
+                    to={item.path}
+                    sx={{
+                      px: 2,
+                      py: 1,
+                      borderRadius: "10px",
+                      color:
+                        pathname === item.path
+                          ? "#297BB4"
+                          : theme.palette.text.primary,
+                      fontWeight: pathname === item.path ? 600 : 500,
+                      fontSize: "0.9rem",
+                      position: "relative",
+                      backgroundColor:
+                        pathname === item.path
+                          ? "rgba(41, 123, 180, 0.08)"
+                          : "transparent",
+                      transition: "all 0.3s ease",
+                      "&:hover": {
+                        backgroundColor: "rgba(41, 123, 180, 0.08)",
+                        color: "#297BB4",
+                      },
+                    }}
+                  >
+                    {item.label}
+                  </Button>
+                ))}
               </Box>
-            ) : (
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <Box sx={{ display: "flex" }}>
-                  {navItems.map((item) => (
-                    <Button
-                      key={item.path}
-                      component={RouterLink}
-                      to={item.path}
-                      sx={{
-                        mx: 1,
-                        color:
-                          pathname === item.path
-                            ? theme.palette.primary.main
-                            : theme.palette.text.primary,
-                        fontWeight: pathname === item.path ? 600 : 400,
-                        position: "relative",
-                        "&:after": {
-                          content: '""',
-                          position: "absolute",
-                          width: pathname === item.path ? "100%" : "0",
-                          height: "2px",
-                          bottom: 0,
-                          left: 0,
-                          backgroundColor: theme.palette.primary.main,
-                          transition: "width 0.2s ease-in-out",
-                        },
-                        "&:hover:after": {
-                          width: "100%",
-                        },
-                      }}
-                    >
-                      {item.label}
-                    </Button>
-                  ))}
-                </Box>
-                <IconButton
-                  color="inherit"
-                  aria-label="toggle theme"
-                  onClick={toggleThemeMode}
-                  sx={{ ml: 2 }}
-                >
-                  {mode === "dark" ? (
-                    <Brightness7 sx={{ color: theme.palette.text.primary }} />
-                  ) : (
-                    <Brightness4 sx={{ color: theme.palette.text.primary }} />
-                  )}
-                </IconButton>
-              </Box>
-            )}
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </Slide>
+              <IconButton
+                aria-label="toggle theme"
+                onClick={toggleThemeMode}
+                sx={{
+                  ml: 1.5,
+                  color: theme.palette.text.primary,
+                  transition: "transform 0.3s",
+                  "&:hover": { transform: "rotate(30deg)" },
+                }}
+              >
+                {mode === "dark" ? <Brightness7 /> : <Brightness4 />}
+              </IconButton>
+            </Box>
+          )}
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
 

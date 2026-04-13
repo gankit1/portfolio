@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import {
   Drawer,
@@ -10,23 +9,10 @@ import {
   ListItemButton,
   Box,
   useTheme,
-  Typography,
 } from "@mui/material";
 import { Close as CloseIcon } from "@mui/icons-material";
-
-interface NavItem {
-  label: string;
-  path: string;
-}
-
-const navItems: NavItem[] = [
-  { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
-  { label: "Skills", path: "/skills" },
-  { label: "Projects", path: "/projects" },
-  { label: "Experience", path: "/experience" },
-  { label: "Contact", path: "/contact" },
-];
+import { navItems } from "../../constants/navigation";
+import Logo from "../common/Logo";
 
 interface MobileNavProps {
   open: boolean;
@@ -42,11 +28,17 @@ const MobileNav = ({ open, onClose }: MobileNavProps) => {
       anchor="right"
       open={open}
       onClose={onClose}
-      PaperProps={{
-        sx: {
-          width: "70%",
-          maxWidth: "300px",
-          backgroundColor: theme.palette.background.paper,
+      slotProps={{
+        paper: {
+          sx: {
+            width: "75%",
+            maxWidth: "320px",
+            backgroundColor:
+              theme.palette.mode === "dark"
+                ? "rgba(11, 17, 32, 0.95)"
+                : "rgba(250, 251, 255, 0.95)",
+            backdropFilter: "blur(20px)",
+          },
         },
       }}
     >
@@ -55,80 +47,63 @@ const MobileNav = ({ open, onClose }: MobileNavProps) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          p: 2,
+          p: 2.5,
         }}
       >
-        <Typography
-          variant="h6"
-          component={RouterLink}
-          to="/"
+        <Logo onClick={onClose} />
+        <IconButton
           onClick={onClose}
           sx={{
             color: theme.palette.text.primary,
-            fontWeight: 700,
-            textDecoration: "none",
-            display: "flex",
-            alignItems: "center",
+            "&:hover": { backgroundColor: "rgba(41, 123, 180, 0.08)" },
           }}
         >
-          <Box
-            component="span"
-            sx={{
-              color: theme.palette.primary.main,
-              marginRight: "0.2rem",
-            }}
-          >
-            &lt;
-          </Box>
-          Portfolio
-          <Box
-            component="span"
-            sx={{
-              color: theme.palette.primary.main,
-            }}
-          >
-            /&gt;
-          </Box>
-        </Typography>
-        <IconButton onClick={onClose}>
           <CloseIcon />
         </IconButton>
       </Box>
-      <Divider />
-      <List>
+      <Divider sx={{ opacity: 0.1 }} />
+      <List sx={{ px: 1, py: 2 }}>
         {navItems.map((item) => (
-          <Fragment key={item.path}>
-            <ListItem disablePadding>
-              <ListItemButton
-                component={RouterLink}
-                to={item.path}
-                onClick={onClose}
-                sx={{
-                  backgroundColor:
-                    pathname === item.path
-                      ? "rgba(25, 118, 210, 0.08)"
-                      : "transparent",
-                  borderLeft:
-                    pathname === item.path
-                      ? `4px solid ${theme.palette.primary.main}`
-                      : "none",
-                  pl: pathname === item.path ? 2 : 3,
+          <ListItem disablePadding key={item.path} sx={{ mb: 0.5 }}>
+            <ListItemButton
+              component={RouterLink}
+              to={item.path}
+              onClick={onClose}
+              sx={{
+                borderRadius: "12px",
+                mx: 1,
+                py: 1.5,
+                backgroundColor:
+                  pathname === item.path
+                    ? "rgba(41, 123, 180, 0.1)"
+                    : "transparent",
+                borderLeft:
+                  pathname === item.path
+                    ? "3px solid #297BB4"
+                    : "3px solid transparent",
+                transition: "all 0.2s ease",
+                "&:hover": {
+                  backgroundColor: "rgba(41, 123, 180, 0.08)",
+                },
+              }}
+            >
+              <ListItemText
+                primary={item.label}
+                slotProps={{
+                  primary: {
+                    sx: {
+                      fontWeight: pathname === item.path ? 700 : 500,
+                      fontSize: "0.95rem",
+                      color:
+                        pathname === item.path
+                          ? "#297BB4"
+                          : theme.palette.text.primary,
+                    },
+                  },
                 }}
-              >
-                <ListItemText
-                  primary={item.label}
-                  primaryTypographyProps={{
-                    fontWeight: pathname === item.path ? 600 : 400,
-                    color:
-                      pathname === item.path
-                        ? theme.palette.primary.main
-                        : theme.palette.text.primary,
-                  }}
-                />
-              </ListItemButton>
-            </ListItem>
-            <Divider />
-          </Fragment>
+              />
+            </ListItemButton>
+          </ListItem>
         ))}
       </List>
     </Drawer>

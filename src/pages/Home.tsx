@@ -1,17 +1,17 @@
-import { Box, Container, useTheme } from "@mui/material";
+import { Box, Container, useTheme, Button } from "@mui/material";
+import { Grid } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 import Hero from "../components/home/Hero";
 import Stats from "../components/home/Stats";
 import SectionTitle from "../components/common/SectionTitle";
 import SkillsGrid from "../components/skills/SkillsGrid";
 import ProjectCard from "../components/projects/ProjectCard";
-import { Grid } from "@mui/material";
 import { projects } from "../data/projectsData";
 import AnimatedSection from "../components/common/AnimatedSection";
-import { Button } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
 
 const Home = () => {
   const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
 
   // Get only featured projects
   const featuredProjects = projects.filter((project) => project.featured);
@@ -25,7 +25,7 @@ const Home = () => {
       <Box
         id="about-section"
         sx={{
-          py: 10,
+          py: { xs: 8, md: 12 },
           backgroundColor: theme.palette.background.default,
         }}
       >
@@ -40,12 +40,22 @@ const Home = () => {
           <AnimatedSection delay={0.2}>
             <Box
               sx={{
-                maxWidth: "800px",
+                maxWidth: "720px",
                 mx: "auto",
                 textAlign: "center",
               }}
             >
-              <Box sx={{ mb: 4, lineHeight: 1.8 }}>
+              <Box
+                sx={{
+                  mb: 4,
+                  lineHeight: 1.8,
+                  color: theme.palette.text.secondary,
+                  "& p": {
+                    mb: 2,
+                    fontSize: "1.05rem",
+                  },
+                }}
+              >
                 <p>
                   I am a passionate Software Developer with over 4+ years of
                   experience creating responsive and user-friendly web
@@ -69,7 +79,6 @@ const Home = () => {
                 component={RouterLink}
                 to="/about"
                 variant="outlined"
-                color="primary"
                 size="large"
               >
                 Learn More About Me
@@ -77,7 +86,7 @@ const Home = () => {
             </Box>
           </AnimatedSection>
 
-          <Box sx={{ mt: 6 }}>
+          <Box sx={{ mt: 8 }}>
             <Stats />
           </Box>
         </Container>
@@ -86,11 +95,10 @@ const Home = () => {
       {/* Skills Section Preview */}
       <Box
         sx={{
-          py: 10,
-          backgroundColor:
-            theme.palette.mode === "light"
-              ? theme.palette.grey[100]
-              : theme.palette.grey[900],
+          py: { xs: 8, md: 12 },
+          background: isDark
+            ? "linear-gradient(180deg, rgba(17,24,39,0.5) 0%, rgba(11,17,32,1) 100%)"
+            : "linear-gradient(180deg, rgba(241,245,249,0.5) 0%, rgba(250,251,255,1) 100%)",
         }}
       >
         <Container maxWidth="lg">
@@ -103,7 +111,7 @@ const Home = () => {
 
           <Box
             sx={{
-              maxHeight: "700px",
+              maxHeight: "600px",
               overflow: "hidden",
               position: "relative",
             }}
@@ -115,12 +123,10 @@ const Home = () => {
                 bottom: 0,
                 left: 0,
                 right: 0,
-                height: "150px",
-                background: `linear-gradient(to bottom, rgba(0,0,0,0), ${
-                  theme.palette.mode === "light"
-                    ? theme.palette.grey[100]
-                    : theme.palette.grey[900]
-                })`,
+                height: "180px",
+                background: isDark
+                  ? "linear-gradient(to bottom, rgba(11,17,32,0), rgba(11,17,32,1))"
+                  : "linear-gradient(to bottom, rgba(250,251,255,0), rgba(250,251,255,1))",
                 display: "flex",
                 alignItems: "flex-end",
                 justifyContent: "center",
@@ -131,7 +137,6 @@ const Home = () => {
                 component={RouterLink}
                 to="/skills"
                 variant="contained"
-                color="primary"
                 size="large"
               >
                 View All Skills
@@ -144,7 +149,7 @@ const Home = () => {
       {/* Featured Projects */}
       <Box
         sx={{
-          py: 10,
+          py: { xs: 8, md: 12 },
           backgroundColor: theme.palette.background.default,
         }}
       >
@@ -158,19 +163,18 @@ const Home = () => {
 
           <Grid container spacing={4}>
             {featuredProjects.map((project, index) => (
-              <Grid item xs={12} sm={6} md={4} key={project.id}>
+              <Grid key={project.id} size={{ xs: 12, sm: 6, md: 4 }}>
                 <ProjectCard project={project} index={index} />
               </Grid>
             ))}
           </Grid>
 
           <AnimatedSection delay={0.4}>
-            <Box sx={{ textAlign: "center", mt: 5 }}>
+            <Box sx={{ textAlign: "center", mt: 6 }}>
               <Button
                 component={RouterLink}
                 to="/projects"
                 variant="contained"
-                color="primary"
                 size="large"
               >
                 View All Projects

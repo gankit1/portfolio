@@ -3,26 +3,7 @@ import { Grid, Box, Tabs, Tab, useTheme, useMediaQuery } from "@mui/material";
 import { projects } from "../../data/projectsData";
 import ProjectCard from "./ProjectCard";
 import { Project } from "../../types/project.types";
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function TabPanel({ children, value, index, ...other }: TabPanelProps) {
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`projects-tabpanel-${index}`}
-      aria-labelledby={`projects-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ py: 3 }}>{children}</Box>}
-    </div>
-  );
-}
+import TabPanel from "../common/TabPanel";
 
 const ProjectsGrid = () => {
   const theme = useTheme();
@@ -48,17 +29,37 @@ const ProjectsGrid = () => {
 
   return (
     <Box>
-      <Box sx={{ borderBottom: 1, borderColor: "divider", mb: 3 }}>
+      <Box
+        sx={{
+          mb: 4,
+          display: "flex",
+          justifyContent: isMobile ? "flex-start" : "center",
+        }}
+      >
         <Tabs
           value={tabValue}
           onChange={handleTabChange}
           variant={isMobile ? "scrollable" : "standard"}
           scrollButtons={isMobile ? "auto" : undefined}
           allowScrollButtonsMobile
-          centered={!isMobile}
-          TabIndicatorProps={{
-            style: {
-              backgroundColor: theme.palette.primary.main,
+          sx={{
+            "& .MuiTab-root": {
+              fontWeight: 600,
+              textTransform: "none",
+              minWidth: isMobile ? "auto" : 100,
+              fontSize: "0.9rem",
+              borderRadius: "10px",
+              mx: 0.5,
+              py: 1,
+              transition: "all 0.2s",
+              color: theme.palette.text.secondary,
+              "&.Mui-selected": {
+                color: "#297BB4",
+                backgroundColor: "rgba(41, 123, 180, 0.08)",
+              },
+            },
+            "& .MuiTabs-indicator": {
+              display: "none",
             },
           }}
         >
@@ -68,11 +69,6 @@ const ProjectsGrid = () => {
               label={tab.label}
               id={`projects-tab-${index}`}
               aria-controls={`projects-tabpanel-${index}`}
-              sx={{
-                fontWeight: 600,
-                textTransform: "none",
-                minWidth: isMobile ? "auto" : 120,
-              }}
             />
           ))}
         </Tabs>
@@ -82,10 +78,10 @@ const ProjectsGrid = () => {
         const filteredProjects = projects.filter(tab.filter);
 
         return (
-          <TabPanel key={index} value={tabValue} index={index}>
+          <TabPanel key={index} value={tabValue} index={index} id="projects">
             <Grid container spacing={3}>
               {filteredProjects.map((project, idx) => (
-                <Grid item xs={12} sm={6} md={4} key={project.id}>
+                <Grid key={project.id} size={{ xs: 12, sm: 6, md: 4 }}>
                   <ProjectCard project={project} index={idx} />
                 </Grid>
               ))}

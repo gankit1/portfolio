@@ -1,6 +1,7 @@
-import { Box, Chip, Paper, Typography, useTheme } from "@mui/material";
+import { Box, Chip, Typography, useTheme } from "@mui/material";
 import { Experience } from "../../types/experience.types";
-import AnimatedSection from "../common/AnimatedSection";
+import { motion } from "framer-motion";
+import GlassCard from "../common/GlassCard";
 
 interface ExperienceCardProps {
   experience: Experience;
@@ -9,6 +10,7 @@ interface ExperienceCardProps {
 
 const ExperienceCard = ({ experience, index }: ExperienceCardProps) => {
   const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
 
   const formatDate = (dateString: string | null): string => {
     if (!dateString) return "Present";
@@ -20,96 +22,159 @@ const ExperienceCard = ({ experience, index }: ExperienceCardProps) => {
   };
 
   return (
-    <AnimatedSection delay={index * 0.2}>
-      <Paper
-        elevation={2}
-        sx={{
-          p: 3,
-          borderLeft: `4px solid ${theme.palette.primary.main}`,
-          mb: 4,
-          position: "relative",
-          transition: "transform 0.3s, box-shadow 0.3s",
-          "&:hover": {
-            transform: "translateX(5px)",
-            boxShadow: theme.shadows[6],
-          },
-        }}
-      >
+    <motion.div
+      initial={{ opacity: 0, x: -30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{
+        duration: 0.6,
+        delay: index * 0.15,
+        ease: [0.25, 0.46, 0.45, 0.94],
+      }}
+    >
+      <Box sx={{ mb: 4, position: "relative" }}>
+        {/* Timeline dot */}
         <Box
           sx={{
-            display: "flex",
-            flexDirection: { xs: "column", sm: "row" },
-            justifyContent: "space-between",
-            mb: 2,
+            position: "absolute",
+            left: -8,
+            top: 24,
+            width: 16,
+            height: 16,
+            borderRadius: "50%",
+            background: "linear-gradient(135deg, #297BB4, #549DD4)",
+            boxShadow: "0 0 16px rgba(41, 123, 180, 0.4)",
+            zIndex: 1,
+            display: { xs: "none", md: "block" },
+          }}
+        />
+
+        <GlassCard
+          sx={{
+            p: { xs: 3, md: 4 },
+            ml: { xs: 0, md: 3 },
+            borderLeft: "3px solid",
+            borderImage: "linear-gradient(180deg, #297BB4, #549DD4) 1",
           }}
         >
-          <Box>
-            <Typography variant="h5" component="h3" fontWeight="bold">
-              {experience.role}
-            </Typography>
-            <Typography variant="subtitle1" color="primary" gutterBottom>
-              {experience.company}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", sm: "row" },
+              justifyContent: "space-between",
+              mb: 2,
+              gap: 1,
+            }}
+          >
+            <Box>
+              <Typography
+                variant="h5"
+                component="h3"
+                sx={{ fontWeight: 800, fontSize: { xs: "1.1rem", md: "1.3rem" } }}
+              >
+                {experience.role}
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  fontWeight: 600,
+                  background: "linear-gradient(135deg, #297BB4, #549DD4)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  display: "inline-block",
+                }}
+              >
+                {experience.company}
+              </Typography>
+            </Box>
+            <Box sx={{ flexShrink: 0 }}>
+              <Typography
+                variant="body2"
+                sx={{
+                  display: "inline-block",
+                  backgroundColor: isDark
+                    ? "rgba(41, 123, 180, 0.1)"
+                    : "rgba(41, 123, 180, 0.06)",
+                  color: isDark ? "#A5B4FC" : "#1E5D87",
+                  p: "6px 14px",
+                  borderRadius: "8px",
+                  fontWeight: 600,
+                  fontSize: "0.8rem",
+                  fontFamily: "'JetBrains Mono', monospace",
+                }}
+              >
+                {formatDate(experience.startDate)} –{" "}
+                {formatDate(experience.endDate)}
+              </Typography>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ mt: 0.5, fontSize: "0.85rem" }}
+              >
+                {experience.location}
+              </Typography>
+            </Box>
+          </Box>
+
+          <Box sx={{ mb: 3 }}>
+            <Typography variant="body2" component="div">
+              <ul
+                style={{
+                  paddingLeft: "20px",
+                  margin: "8px 0",
+                  listStyleType: "none",
+                }}
+              >
+                {experience.description.map((item, idx) => (
+                  <li
+                    key={idx}
+                    style={{
+                      marginBottom: "8px",
+                      position: "relative",
+                      paddingLeft: "16px",
+                      lineHeight: 1.7,
+                      color: theme.palette.text.secondary,
+                    }}
+                  >
+                    <span
+                      style={{
+                        position: "absolute",
+                        left: 0,
+                        top: "8px",
+                        width: "6px",
+                        height: "6px",
+                        borderRadius: "50%",
+                        background: "linear-gradient(135deg, #297BB4, #549DD4)",
+                      }}
+                    />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </Typography>
           </Box>
-          <Box sx={{ mt: { xs: 1, sm: 0 } }}>
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              sx={{
-                display: "inline-block",
-                backgroundColor:
-                  theme.palette.mode === "dark"
-                    ? "rgba(255, 255, 255, 0.08)"
-                    : "rgba(0, 0, 0, 0.06)",
-                p: 1,
-                borderRadius: 1,
-              }}
-            >
-              {formatDate(experience.startDate)} -{" "}
-              {formatDate(experience.endDate)}
-            </Typography>
-            <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
-              {experience.location}
-            </Typography>
+
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.75 }}>
+            {experience.technologies.map((tech) => (
+              <Chip
+                key={tech}
+                label={tech}
+                size="small"
+                sx={{
+                  backgroundColor: isDark
+                    ? "rgba(41, 123, 180, 0.1)"
+                    : "rgba(41, 123, 180, 0.06)",
+                  color: isDark ? "#A5B4FC" : "#1E5D87",
+                  fontWeight: 500,
+                  fontSize: "0.75rem",
+                  border: `1px solid ${isDark ? "rgba(41,123,180,0.15)" : "rgba(41,123,180,0.1)"}`,
+                }}
+              />
+            ))}
           </Box>
-        </Box>
-
-        <Box sx={{ mb: 2 }}>
-          <Typography variant="body2" component="div">
-            <ul
-              style={{
-                paddingLeft: "20px",
-                marginTop: "8px",
-                marginBottom: "8px",
-              }}
-            >
-              {experience.description.map((item, idx) => (
-                <li key={idx} style={{ marginBottom: "4px" }}>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </Typography>
-        </Box>
-
-        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-          {experience.technologies.map((tech) => (
-            <Chip
-              key={tech}
-              label={tech}
-              size="small"
-              sx={{
-                backgroundColor:
-                  theme.palette.mode === "dark"
-                    ? "rgba(255, 255, 255, 0.08)"
-                    : "rgba(0, 0, 0, 0.08)",
-                color: theme.palette.text.secondary,
-              }}
-            />
-          ))}
-        </Box>
-      </Paper>
-    </AnimatedSection>
+        </GlassCard>
+      </Box>
+    </motion.div>
   );
 };
 

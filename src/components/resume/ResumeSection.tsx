@@ -39,43 +39,27 @@ const ResumeSection: React.FC = () => {
   return (
     <Box component="section" sx={{ py: 6 }}>
       <AnimatedSection>
-        <Typography
-          variant="h4"
-          component="h2"
-          gutterBottom
-          fontWeight="bold"
-          textAlign="center"
-        >
+        <Typography variant="h4" component="h2" gutterBottom sx={{ fontWeight: 'bold', textAlign: 'center' }}>
           Resume
         </Typography>
 
-        <Typography
-          variant="subtitle1"
-          color="text.secondary"
-          textAlign="center"
-          sx={{ mb: 6, maxWidth: "800px", mx: "auto" }}
-        >
+        <Typography variant="subtitle1" color="text.secondary" sx={{ mb: 6, maxWidth: "800px", mx: "auto", textAlign: 'center' }}>
           {personalInfo.summary}
         </Typography>
       </AnimatedSection>
 
       <Grid container spacing={4}>
         {/* Personal Info */}
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <AnimatedSection delay={0.1}>
             <Paper elevation={2} sx={{ p: 3, borderRadius: 2 }}>
-              <Typography
-                variant="h5"
-                component="h3"
-                gutterBottom
-                fontWeight="bold"
-              >
+              <Typography variant="h5" component="h3" gutterBottom sx={{ fontWeight: 'bold' }}>
                 Personal Information
               </Typography>
               <Divider sx={{ mb: 3 }} />
 
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={6} md={4}>
+                <Grid size={{ xs: 12, sm: 6, md: 4 }}>
                   <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
                     <Business
                       sx={{ mr: 1, color: theme.palette.primary.main }}
@@ -84,7 +68,7 @@ const ResumeSection: React.FC = () => {
                   </Box>
                 </Grid>
 
-                <Grid item xs={12} sm={6} md={4}>
+                <Grid size={{ xs: 12, sm: 6, md: 4 }}>
                   <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
                     <LocationOn
                       sx={{ mr: 1, color: theme.palette.primary.main }}
@@ -95,7 +79,7 @@ const ResumeSection: React.FC = () => {
                   </Box>
                 </Grid>
 
-                <Grid item xs={12} sm={6} md={4}>
+                <Grid size={{ xs: 12, sm: 6, md: 4 }}>
                   <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
                     <CalendarMonth
                       sx={{ mr: 1, color: theme.palette.primary.main }}
@@ -111,15 +95,10 @@ const ResumeSection: React.FC = () => {
         </Grid>
 
         {/* Work Experience */}
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <AnimatedSection delay={0.2}>
             <Paper elevation={2} sx={{ p: 3, borderRadius: 2 }}>
-              <Typography
-                variant="h5"
-                component="h3"
-                gutterBottom
-                fontWeight="bold"
-              >
+              <Typography variant="h5" component="h3" gutterBottom sx={{ fontWeight: 'bold' }}>
                 Work Experience
               </Typography>
               <Divider sx={{ mb: 3 }} />
@@ -130,8 +109,8 @@ const ResumeSection: React.FC = () => {
                   sx={{ mb: index < workExperience.length - 1 ? 4 : 0 }}
                 >
                   <Grid container spacing={2}>
-                    <Grid item xs={12} md={4}>
-                      <Typography variant="h6" fontWeight="medium">
+                    <Grid size={{ xs: 12, md: 4 }}>
+                      <Typography variant="h6" sx={{ fontWeight: 'medium' }}>
                         {job.position}
                       </Typography>
                       <Box
@@ -169,7 +148,7 @@ const ResumeSection: React.FC = () => {
                       </Box>
                     </Grid>
 
-                    <Grid item xs={12} md={8}>
+                    <Grid size={{ xs: 12, md: 8 }}>
                       <List dense disablePadding>
                         {job.highlights.map((highlight, i) => (
                           <ListItem
@@ -211,15 +190,10 @@ const ResumeSection: React.FC = () => {
         </Grid>
 
         {/* Education */}
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <AnimatedSection delay={0.3}>
             <Paper elevation={2} sx={{ p: 3, borderRadius: 2, height: "100%" }}>
-              <Typography
-                variant="h5"
-                component="h3"
-                gutterBottom
-                fontWeight="bold"
-              >
+              <Typography variant="h5" component="h3" gutterBottom sx={{ fontWeight: 'bold' }}>
                 Education
               </Typography>
               <Divider sx={{ mb: 3 }} />
@@ -229,7 +203,7 @@ const ResumeSection: React.FC = () => {
                   key={index}
                   sx={{ mb: index < education.length - 1 ? 3 : 0 }}
                 >
-                  <Typography variant="h6" fontWeight="medium">
+                  <Typography variant="h6" sx={{ fontWeight: 'medium' }}>
                     {edu.degree}
                   </Typography>
 
@@ -281,15 +255,10 @@ const ResumeSection: React.FC = () => {
         </Grid>
 
         {/* Projects */}
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <AnimatedSection delay={0.4}>
             <Paper elevation={2} sx={{ p: 3, borderRadius: 2, height: "100%" }}>
-              <Typography
-                variant="h5"
-                component="h3"
-                gutterBottom
-                fontWeight="bold"
-              >
+              <Typography variant="h5" component="h3" gutterBottom sx={{ fontWeight: 'bold' }}>
                 Projects
               </Typography>
               <Divider sx={{ mb: 3 }} />
@@ -298,7 +267,7 @@ const ResumeSection: React.FC = () => {
                   key={index}
                   sx={{ mb: index < projects.length - 1 ? 3 : 0 }}
                 >
-                  <Typography variant="h6" fontWeight="medium">
+                  <Typography variant="h6" sx={{ fontWeight: 'medium' }}>
                     {project.title}
                   </Typography>
 
@@ -345,15 +314,10 @@ const ResumeSection: React.FC = () => {
         </Grid>
 
         {/* Skills */}
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <AnimatedSection delay={0.5}>
             <Paper elevation={2} sx={{ p: 3, borderRadius: 2, height: "100%" }}>
-              <Typography
-                variant="h5"
-                component="h3"
-                gutterBottom
-                fontWeight="bold"
-              >
+              <Typography variant="h5" component="h3" gutterBottom sx={{ fontWeight: 'bold' }}>
                 Skills
               </Typography>
               <Divider sx={{ mb: 3 }} />
@@ -392,15 +356,10 @@ const ResumeSection: React.FC = () => {
         </Grid>
 
         {/* Achievements */}
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <AnimatedSection delay={0.6}>
             <Paper elevation={2} sx={{ p: 3, borderRadius: 2, height: "100%" }}>
-              <Typography
-                variant="h5"
-                component="h3"
-                gutterBottom
-                fontWeight="bold"
-              >
+              <Typography variant="h5" component="h3" gutterBottom sx={{ fontWeight: 'bold' }}>
                 Achievements
               </Typography>
               <Divider sx={{ mb: 3 }} />
@@ -410,7 +369,7 @@ const ResumeSection: React.FC = () => {
                   key={index}
                   sx={{ mb: index < achievements.length - 1 ? 3 : 0 }}
                 >
-                  <Typography variant="h6" fontWeight="medium">
+                  <Typography variant="h6" sx={{ fontWeight: 'medium' }}>
                     {achievement.title}
                   </Typography>
 
