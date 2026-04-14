@@ -2,7 +2,6 @@ import { Box, Container, Grid, Typography, useTheme } from "@mui/material";
 import SectionTitle from "../components/common/SectionTitle";
 import AnimatedSection from "../components/common/AnimatedSection";
 import ContactForm from "../components/contact/ContactForm";
-import ContactInfo from "../components/contact/ContactInfo";
 
 const Contact = () => {
   const theme = useTheme();
